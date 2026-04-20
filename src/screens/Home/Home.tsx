@@ -991,9 +991,10 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
       setTimeout(() => mobileSearchTextareaRef.current?.focus(), 100);
     }
     
-    // "Myślę..." bubble appears 1200ms after user msg (ChatGPT/Claude-style).
+    // ChatGPT/Claude-style: show "Myślę..." dots immediately, then after a
+    // minimum 1200ms "thinking" window stream the AI reply char-by-char.
+    setIsTyping(true);
     const thinkingStart = Date.now();
-    const thinkingTimer = setTimeout(() => setIsTyping(true), 1200);
 
     const generateResponse = async () => {
       const searchResult = await searchWebsite(valueToUse);
@@ -1143,27 +1144,37 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
         };
       }
       
-      // Enforce min 1200ms thinking period so the "Myślę..." bubble isn't skipped
-      // when the API returns faster than the delay.
+      // Keep the "Myślę..." bubble visible for at least 1200ms before streaming.
       const elapsed = Date.now() - thinkingStart;
       if (elapsed < 1200) {
         await new Promise(resolve => setTimeout(resolve, 1200 - elapsed));
       }
-      clearTimeout(thinkingTimer);
 
-      const assistantMessage: ChatMessage = {
-        id: (Date.now() + 1).toString(),
-        role: 'assistant',
-        content: answerData.headline,
-        timestamp: new Date().toISOString(),
-        answerData,
-        sources: searchResult.sources,
-        followUpQuestions: searchResult.followUpQuestions,
-      };
-      setChatMessages(prev => [...prev, assistantMessage]);
-      playReceivedSound();
+      // Phase 1: replace thinking bubble with an empty text bubble and
+      // stream the headline char-by-char (ChatGPT/Claude style).
+      const assistantId = (Date.now() + 1).toString();
+      const timestamp = new Date().toISOString();
       setIsTyping(false);
-      
+      setChatMessages(prev => [...prev, {
+        id: assistantId,
+        role: 'assistant',
+        content: '',
+        timestamp,
+      }]);
+      playReceivedSound();
+      streamMessageContent(assistantId, answerData.headline);
+
+      // Phase 2: once the stream settles, attach answerData so the bubble
+      // expands into the full AIAnswerCard with sources + follow-ups.
+      const streamDurationMs = Math.ceil(answerData.headline.length / 3) * 20 + 150;
+      setTimeout(() => {
+        setChatMessages(prev => prev.map(m =>
+          m.id === assistantId
+            ? { ...m, answerData, sources: searchResult.sources, followUpQuestions: searchResult.followUpQuestions }
+            : m,
+        ));
+      }, streamDurationMs);
+
       // Track AI response
       analytics.trackMessageReceived(queryType, !!recommendationData);
       analytics.trackWebSearchQuery(valueToUse, searchResult.sources.length);
