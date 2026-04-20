@@ -3737,9 +3737,16 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                       }
                     }}
                   >
-                  {chatMessages.map((message) => (
-                    <div key={message.id} data-message-id={message.id} className="mb-5 scroll-mt-4">
-                      <div 
+                  {chatMessages.map((message, idx) => {
+                    // Pin-room: the LAST assistant message reserves 60vh so the
+                    // previous user message can stay pinned near the top. When
+                    // a new turn starts, this class moves off the old assistant
+                    // message (no longer last) and onto the new one.
+                    const isLast = idx === chatMessages.length - 1;
+                    const pinRoom = isLast && message.role === 'assistant' ? 'min-h-[60vh]' : '';
+                    return (
+                    <div key={message.id} data-message-id={message.id} className={`mb-5 scroll-mt-4 ${pinRoom}`}>
+                      <div
                         className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
                       >
                         {message.role === 'assistant' && message.answerData ? (
@@ -3819,11 +3826,13 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                         )}
                       </div>
                     </div>
-                  ))}
-                  
-                  {/* Typing Indicator */}
+                    );
+                  })}
+
+                  {/* Typing Indicator — also claims 60vh of pin-room while
+                      the assistant message doesn't exist yet. */}
                   {isTyping && (
-                    <div className="mb-3">
+                    <div className="mb-3 min-h-[60vh]">
                       <div className="flex justify-start">
                         <div className="max-w-[80%] rounded-2xl px-4 py-3 bg-white/10">
                           <div className="flex gap-1.5">
@@ -3863,12 +3872,6 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                     </div>
                     )}
 
-                  {/* Bottom spacer: reserves vertical room so the just-sent
-                      user message can be pinned ~30px from the scroll-container
-                      top edge (ChatGPT/Claude style). Matches /projects/3 AiPanel. */}
-                  {chatMessages.length > 0 && (
-                    <div style={{ minHeight: '60vh', flexShrink: 0 }} aria-hidden />
-                  )}
                   </div>
 
                   {/* Scroll to bottom button */}
@@ -5197,8 +5200,11 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                               WebkitMaskImage: 'linear-gradient(transparent 0px, transparent 40px, black 64px, black calc(100% - 16px), transparent 100%)',
                             }}
                           >
-                            {chatMessages.map((message) => (
-                              <div key={message.id} data-message-id={message.id} className="mb-5 scroll-mt-4">
+                            {chatMessages.map((message, idx) => {
+                              const isLast = idx === chatMessages.length - 1;
+                              const pinRoom = isLast && message.role === 'assistant' ? 'min-h-[60vh]' : '';
+                              return (
+                              <div key={message.id} data-message-id={message.id} className={`mb-5 scroll-mt-4 ${pinRoom}`}>
                                 <div className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}>
                                   {message.role === 'assistant' && message.answerData ? (
                                     <AIAnswerCard
@@ -5275,11 +5281,12 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                                   )}
                                 </div>
                               </div>
-                            ))}
-                            
+                              );
+                            })}
+
                             {/* Typing Indicator */}
                             {isTyping && (
-                              <div className="mb-3">
+                              <div className="mb-3 min-h-[60vh]">
                                 <div className="flex justify-start">
                                   <div className="max-w-[80%] rounded-2xl px-4 py-3 bg-white/10">
                                     <div className="flex gap-1.5">
@@ -5304,9 +5311,6 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                               </div>
                             )}
 
-                            {chatMessages.length > 0 && (
-                              <div style={{ minHeight: '60vh', flexShrink: 0 }} aria-hidden />
-                            )}
                           </div>
 
                           {/* Mobile Scroll to bottom button */}
