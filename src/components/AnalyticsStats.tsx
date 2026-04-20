@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { TrendingUp, TrendingDown, Users, MessageSquare, Star, Image, Clock, Search } from 'lucide-react';
-import { fetchWidgetAnalytics, WidgetAnalyticsSummary, DATE_RANGE_PRESETS, formatDuration } from '../../utils/analyticsAPI';
+import { fetchWidgetAnalytics, WidgetAnalyticsSummary, DATE_RANGE_PRESETS, formatDuration } from '../utils/analyticsAPI';
 
 interface AnalyticsStatsProps {
   ownerId: string; // ID właściciela do filtrowania danych

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router';
 import { Eye, EyeOff } from 'lucide-react';
 
-export default function Login() {
+export function Login() {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');

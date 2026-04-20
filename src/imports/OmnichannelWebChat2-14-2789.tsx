@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import svgPaths from "./svg-jorrrc2mql";
 import imgImage54 from "figma:asset/64c15b1cf3b110e6801db2508c6b151105e182ac.png";
 import imgLogoNanei from "figma:asset/9084835665e8be6cbb61b436529e8b3fa06d7631.png";
-import DataView from '../app/components/DataView';
+import DataView from '../components/DataView';
 
 function Cien() {
   return <div className="absolute bg-gradient-to-b from-white bottom-0 left-[684px] shadow-[-20px_4px_200px_0px_#f2f2f8] to-[rgba(255,255,255,0)] top-[80px] w-[152px] hidden xl:block" data-name="cień" />;

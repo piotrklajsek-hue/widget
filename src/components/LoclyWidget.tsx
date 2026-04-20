@@ -67,5 +67,5 @@
  *                   no layout side-effects on host.  ✅
  */
 
-export { LoclyWidget } from '../pages/Home';
+export { LoclyWidget } from '../screens/Home/Home';
 export type { LoclyWidgetProps } from './LoclyWidgetProps';

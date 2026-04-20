@@ -5,7 +5,7 @@
  */
 
 import { useState, useEffect, useRef, useCallback } from 'react';
-import * as api from '../../services/api';
+import * as api from '../services/api';
 
 export type MobileView = 'search' | 'chat' | 'recommend' | 'addOpinion';
 

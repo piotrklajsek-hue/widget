@@ -5,10 +5,10 @@
  */
 
 import { useState, useCallback } from 'react';
-import * as analytics from '../../utils/analytics';
-import * as authService from '../../services/auth';
-import * as api from '../../services/api';
-import { GOOGLE_CONFIG, FACEBOOK_CONFIG, TIKTOK_CONFIG } from '../../config/DEVELOPER_SETUP';
+import * as analytics from '../utils/analytics';
+import * as authService from '../services/auth';
+import * as api from '../services/api';
+import { GOOGLE_CONFIG, FACEBOOK_CONFIG, TIKTOK_CONFIG } from '../config/DEVELOPER_SETUP';
 
 export function useWidgetAuth() {
   const [showAuthModal, setShowAuthModal] = useState(false);

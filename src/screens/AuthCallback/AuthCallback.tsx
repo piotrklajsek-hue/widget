@@ -19,7 +19,7 @@ import { handleOAuthCallback, consumePendingAction, type AuthProvider } from '..
  * 4. Po sukcesie: redirectuje na / z pending action
  * 5. Po bledzie: wyswietla komunikat
  */
-export default function AuthCallback() {
+export function AuthCallback() {
   const navigate = useNavigate();
   const { provider } = useParams<{ provider: string }>();
   const [searchParams] = useSearchParams();

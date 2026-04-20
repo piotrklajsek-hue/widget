@@ -2,7 +2,7 @@ import { ArrowLeft } from 'lucide-react';
 import { useNavigate } from 'react-router';
 import OmnichannelWebChat from '../../imports/OmnichannelWebChat2-14-2789';
 
-export default function AdminPanel() {
+export function AdminPanel() {
   const navigate = useNavigate();
 
   return (

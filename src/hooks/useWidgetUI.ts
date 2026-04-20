@@ -6,7 +6,7 @@
  */
 
 import { useState, useRef, useEffect, useCallback } from 'react';
-import * as analytics from '../../utils/analytics';
+import * as analytics from '../utils/analytics';
 
 export interface UseWidgetUIOptions {
   placeholders?: string[];

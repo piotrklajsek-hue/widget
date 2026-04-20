@@ -17,7 +17,7 @@ import { ShadowDOMWrapper } from './components/ShadowDOMWrapper';
  *   The landing page (Home) wraps LoclyWidget with the Dark1920W background.
  *   External sites only need LoclyWidget — no landing page content is copied.
  */
-export default function App() {
+export function App() {
   return (
     <ShadowDOMWrapper className="locly-widget">
       <RouterProvider router={router} />

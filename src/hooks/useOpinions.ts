@@ -5,8 +5,8 @@
  */
 
 import { useState, useRef, useCallback } from 'react';
-import * as analytics from '../../utils/analytics';
-import * as api from '../../services/api';
+import * as analytics from '../utils/analytics';
+import * as api from '../services/api';
 
 export interface Recommendation {
   id: string;

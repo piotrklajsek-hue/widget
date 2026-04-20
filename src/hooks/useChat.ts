@@ -5,8 +5,8 @@
  */
 
 import { useState, useRef, useEffect, useCallback } from 'react';
-import * as analytics from '../../utils/analytics';
-import { playMessageReceivedSound, playMessageSentSound } from '../../utils/messageSound';
+import * as analytics from '../utils/analytics';
+import { playMessageReceivedSound, playMessageSentSound } from '../utils/messageSound';
 
 export interface ChatMessage {
   id: string;

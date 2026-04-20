@@ -58,9 +58,9 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { Toaster } from 'sonner';
-import { LoclyWidget } from './app/components/LoclyWidget';
-import { ShadowDOMWrapper } from './app/components/ShadowDOMWrapper';
-import type { LoclyWidgetProps } from './app/components/LoclyWidgetProps';
+import { LoclyWidget } from './components/LoclyWidget';
+import { ShadowDOMWrapper } from './components/ShadowDOMWrapper';
+import type { LoclyWidgetProps } from './components/LoclyWidgetProps';
 
 // Read config from global variable (set by host page before this script loads)
 declare global {

@@ -5,7 +5,7 @@
  */
 
 import { useState, useRef, useEffect, useCallback } from 'react';
-import * as api from '../../services/api';
+import * as api from '../services/api';
 
 const MAX_RECORDING_DURATION = 15;
 

@@ -5,11 +5,11 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Mic, Settings, ArrowUp, ArrowDown, X, Star, Plus, MessageSquare, Search, ArrowLeft, Loader2, Check, ExternalLink, MicOff, MoreHorizontal, Mail, Volume2, VolumeX, Frown } from 'lucide-react';
 import { FaFacebook, FaGoogle, FaTiktok } from 'react-icons/fa';
 import { motion, AnimatePresence } from 'motion/react';
-import { useOptionalSearchParams } from '../hooks/useOptionalRouter';
+import { useOptionalSearchParams } from '../../hooks/useOptionalRouter';
 import { toast } from 'sonner';
-import { AIAnswerCard, type AIAnswerData } from '../components/AIAnswerCard';
-import type { LoclyWidgetProps } from '../components/LoclyWidgetProps';
-import { DEFAULT_WIDGET_PROPS } from '../components/LoclyWidgetProps';
+import { AIAnswerCard, type AIAnswerData } from '../../components/AIAnswerCard';
+import type { LoclyWidgetProps } from '../../components/LoclyWidgetProps';
+import { DEFAULT_WIDGET_PROPS } from '../../components/LoclyWidgetProps';
 import {
   useChat, type ChatMessage,
   useRecording,
@@ -17,7 +17,7 @@ import {
   useOpinions, type Recommendation,
   useMobileOverlay,
   useWidgetUI,
-} from '../hooks';
+} from '../../hooks';
 import Dark1920W from '../../imports/1920WDark';
 import imgOvalCopy2 from "figma:asset/641ec2f5caccbb1bfbeefca86996422307782b4a.png";
 import imgOvalCopy3 from "figma:asset/7a72b08b1356732982cab37c46a78817918fe275.png";
@@ -25,14 +25,14 @@ import imgOvalCopy9 from "figma:asset/e5b89196e3a7344093a1a560db566720900d936b.p
 import userAvatar from "figma:asset/adc7e7d85aac71bba5e8ec5ddc0818b05c860f44.png";
 import complexQueriesImage from "figma:asset/20d3be9ae3ba9acb1a69a5a8519c22b6131b7386.png";
 import * as analytics from '../../utils/analytics';
-import { WidgetTooltip } from '../components/WidgetTooltip';
+import { WidgetTooltip } from '../../components/WidgetTooltip';
 import { searchWebsite, classifyQuery, type WebSearchSource, type FollowUpQuestion } from '../../utils/llmSearchService';
 import * as api from '../../services/api';
 import * as authService from '../../services/auth';
 import { GOOGLE_CONFIG, FACEBOOK_CONFIG, TIKTOK_CONFIG } from '../../config/DEVELOPER_SETUP';
 
 // Re-export types for consumers
-export type { LoclyWidgetProps } from '../components/LoclyWidgetProps';
+export type { LoclyWidgetProps } from '../../components/LoclyWidgetProps';
 
 // MAX_RECORDING_DURATION is provided by useRecording hook
 
@@ -6630,7 +6630,7 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
  * The widget itself is fully self-contained (all fixed-positioned elements)
  * and can be embedded on any page without the landing page background.
  */
-export default function Home() {
+export function Home() {
   return (
     <div className="relative min-h-screen">
       {/* Background Image Container - Retina Ready */}
