@@ -3762,35 +3762,38 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                               handleSubmit(question);
                             }}
                           />
-                        ) : (
-                          // Regular message (user bubble or plain assistant text)
-                          <div 
-                            className={`max-w-[80%] rounded-2xl outline-none ${
-                              message.role === 'user' 
-                                ? 'text-white' 
-                                : 'text-white'
-                            }`}
-                            style={message.role === 'user' ? {
-                              backgroundColor: 'rgba(10, 12, 20, 0.25)',
-                              padding: '12px 16px'
-                            } : undefined}
+                        ) : message.role === 'user' ? (
+                          // User bubble
+                          <div
+                            className="max-w-[80%] rounded-2xl outline-none text-white"
+                            style={{ backgroundColor: 'rgba(10, 12, 20, 0.25)', padding: '12px 16px' }}
                           >
-                            <p 
+                            <p
                               className="whitespace-pre-wrap break-words"
-                              style={message.role === 'user' ? {
-                                fontSize: '14px',
-                                lineHeight: '1.4'
-                              } : { fontSize: '14px', lineHeight: '1.4' }}
+                              style={{ fontSize: '14px', lineHeight: '1.4' }}
                             >
                               {message.content}
                             </p>
-                            {message.content !== 'Czy chcesz zakończyć rozmowę?' && message.role === 'assistant' && (
-                              <p className="text-xs mt-1 text-white/40">
-                                {new Date(message.timestamp).toLocaleTimeString('pl-PL', { 
-                                  hour: '2-digit', 
-                                  minute: '2-digit' 
-                                })}
+                          </div>
+                        ) : (
+                          // Plain-text assistant bubble — mirrors AIAnswerCard's
+                          // headline block so the Phase 1 → Phase 2 (stream → card)
+                          // transition doesn't visibly reflow the text.
+                          <div className="w-full">
+                            <div className="pr-5 pt-1 pb-3">
+                              <p className="text-white/90 text-sm leading-relaxed whitespace-pre-wrap break-words">
+                                {message.content}
                               </p>
+                            </div>
+                            {message.content !== 'Czy chcesz zakończyć rozmowę?' && (
+                              <div className="pr-5 pb-2.5">
+                                <p className="text-white/20 text-[10px]">
+                                  {new Date(message.timestamp).toLocaleTimeString('pl-PL', {
+                                    hour: '2-digit',
+                                    minute: '2-digit',
+                                  })}
+                                </p>
+                              </div>
                             )}
                             
                             {/* End Conversation Buttons */}
@@ -5216,34 +5219,37 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                                         handleSubmit(question);
                                       }}
                                     />
-                                  ) : (
-                                    <div 
-                                      className={`max-w-[80%] rounded-2xl outline-none ${
-                                        message.role === 'user' 
-                                          ? 'text-white' 
-                                          : 'text-white'
-                                      }`}
-                                      style={message.role === 'user' ? {
-                                        backgroundColor: 'rgba(10, 12, 20, 0.25)',
-                                        padding: '12px 16px'
-                                      } : undefined}
+                                  ) : message.role === 'user' ? (
+                                    <div
+                                      className="max-w-[80%] rounded-2xl outline-none text-white"
+                                      style={{ backgroundColor: 'rgba(10, 12, 20, 0.25)', padding: '12px 16px' }}
                                     >
-                                      <p 
+                                      <p
                                         className="whitespace-pre-wrap break-words"
-                                        style={message.role === 'user' ? {
-                                          fontSize: '14px',
-                                          lineHeight: '1.4'
-                                        } : { fontSize: '14px', lineHeight: '1.4' }}
+                                        style={{ fontSize: '14px', lineHeight: '1.4' }}
                                       >
                                         {message.content}
                                       </p>
-                                      {message.content !== 'Czy chcesz zakończyć rozmowę?' && message.role === 'assistant' && (
-                                        <p className="text-xs mt-1 text-white/40">
-                                          {new Date(message.timestamp).toLocaleTimeString('pl-PL', { 
-                                            hour: '2-digit', 
-                                            minute: '2-digit' 
-                                          })}
+                                    </div>
+                                  ) : (
+                                    // Plain-text assistant bubble — mirrors AIAnswerCard's
+                                    // headline block so the stream → card transition
+                                    // doesn't visibly reflow the text.
+                                    <div className="w-full">
+                                      <div className="pr-5 pt-1 pb-3">
+                                        <p className="text-white/90 text-sm leading-relaxed whitespace-pre-wrap break-words">
+                                          {message.content}
                                         </p>
+                                      </div>
+                                      {message.content !== 'Czy chcesz zakończyć rozmowę?' && (
+                                        <div className="pr-5 pb-2.5">
+                                          <p className="text-white/20 text-[10px]">
+                                            {new Date(message.timestamp).toLocaleTimeString('pl-PL', {
+                                              hour: '2-digit',
+                                              minute: '2-digit',
+                                            })}
+                                          </p>
+                                        </div>
                                       )}
                                       
                                       {/* End Conversation Buttons */}
