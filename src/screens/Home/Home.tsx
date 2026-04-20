@@ -182,6 +182,8 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
     triggerHaptic,
     playSentSound, playReceivedSound,
     scrollChatToBottom,
+    scrollUserMessageToTop,
+    streamMessageContent,
     handleChatTouchStart, handleChatTouchMove, handleChatTouchEnd,
     isAtBottom, updateScrollButton,
     countUnreadAiMessages, countUnreadAiMessagesMobile,
@@ -957,7 +959,7 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
     playSentSound();
     lastUserMessageIdRef.current = userMessage.id;
     setUnreadScrollMessages(0);
-    scrollChatToBottom(userMessage.id);
+    scrollUserMessageToTop(userMessage.id);
     
     // Show chat overlay (desktop only) or switch to chat view (mobile)
     if (showMobileSearch) {
@@ -989,10 +991,10 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
       setTimeout(() => mobileSearchTextareaRef.current?.focus(), 100);
     }
     
-    // Show typing indicator
-    setIsTyping(true);
-    
-    // Execute LLM web search + generate AI response
+    // "Myślę..." bubble appears 1200ms after user msg (ChatGPT/Claude-style).
+    const thinkingStart = Date.now();
+    const thinkingTimer = setTimeout(() => setIsTyping(true), 1200);
+
     const generateResponse = async () => {
       const searchResult = await searchWebsite(valueToUse);
       
@@ -1141,7 +1143,14 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
         };
       }
       
-      // AI answer card message with sources and follow-up questions
+      // Enforce min 1200ms thinking period so the "Myślę..." bubble isn't skipped
+      // when the API returns faster than the delay.
+      const elapsed = Date.now() - thinkingStart;
+      if (elapsed < 1200) {
+        await new Promise(resolve => setTimeout(resolve, 1200 - elapsed));
+      }
+      clearTimeout(thinkingTimer);
+
       const assistantMessage: ChatMessage = {
         id: (Date.now() + 1).toString(),
         role: 'assistant',
@@ -1939,20 +1948,24 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
       playSentSound();
       lastUserMessageIdRef.current = userMessage.id;
       setUnreadScrollMessages(0);
-      scrollChatToBottom(userMessage.id);
+      scrollUserMessageToTop(userMessage.id);
       
+      setIsTyping(true);
       setTimeout(() => {
-        const farewellMessage: ChatMessage = {
-          id: (Date.now() + 1).toString(),
+        const farewellId = (Date.now() + 1).toString();
+        const farewellFull = 'Dziękuję za rozmowę! Do zobaczenia! 👋\n\n**Rozmowa zakończona**';
+        setChatMessages(prev => [...prev, {
+          id: farewellId,
           role: 'assistant',
-          content: 'Dziękuję za rozmowę! Do zobaczenia! 👋\n\n**Rozmowa zakończona**',
-          timestamp: new Date().toISOString()
-        };
-        setChatMessages(prev => [...prev, farewellMessage]);
+          content: '',
+          timestamp: new Date().toISOString(),
+        }]);
+        setIsTyping(false);
+        streamMessageContent(farewellId, farewellFull);
         playReceivedSound();
         setIsChatEnded(true);
         setIsAwaitingEndConfirmation(false);
-      }, 500);
+      }, 1200);
     } else {
       // User wants to continue
       const userMessage: ChatMessage = {
@@ -1965,19 +1978,23 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
       playSentSound();
       lastUserMessageIdRef.current = userMessage.id;
       setUnreadScrollMessages(0);
-      scrollChatToBottom(userMessage.id);
+      scrollUserMessageToTop(userMessage.id);
       
+      setIsTyping(true);
       setTimeout(() => {
-        const continueMessage: ChatMessage = {
-          id: (Date.now() + 1).toString(),
+        const continueId = (Date.now() + 1).toString();
+        const continueFull = 'Świetnie! W czym jeszcze mogę Ci pomóc?';
+        setChatMessages(prev => [...prev, {
+          id: continueId,
           role: 'assistant',
-          content: 'Świetnie! W czym jeszcze mogę Ci pomóc?',
-          timestamp: new Date().toISOString()
-        };
-        setChatMessages(prev => [...prev, continueMessage]);
+          content: '',
+          timestamp: new Date().toISOString(),
+        }]);
+        setIsTyping(false);
+        streamMessageContent(continueId, continueFull);
         playReceivedSound();
         setIsAwaitingEndConfirmation(false);
-      }, 500);
+      }, 1200);
     }
   };
   

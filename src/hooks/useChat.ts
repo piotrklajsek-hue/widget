@@ -174,6 +174,25 @@ export function useChat() {
     });
   }, []);
 
+  // Char-by-char streaming (ChatGPT/Claude style) — matches /projects/3 AiPanel.
+  const streamMessageContent = useCallback((
+    messageId: string,
+    fullContent: string,
+    chunkSize = 3,
+    intervalMs = 20,
+  ) => {
+    let pos = 0;
+    const interval = setInterval(() => {
+      pos = Math.min(pos + chunkSize, fullContent.length);
+      const done = pos >= fullContent.length;
+      setChatMessages(prev =>
+        prev.map(m => (m.id === messageId ? { ...m, content: fullContent.slice(0, pos) } : m)),
+      );
+      if (done) clearInterval(interval);
+    }, intervalMs);
+    return () => clearInterval(interval);
+  }, []);
+
   const scrollChatToBottom = useCallback((_messageId?: string) => {
     setTimeout(() => {
       if (chatMessagesRef.current) {
@@ -415,6 +434,7 @@ export function useChat() {
     playSentSound, playReceivedSound,
     scrollChatToBottom,
     scrollUserMessageToTop,
+    streamMessageContent,
     handleChatTouchStart, handleChatTouchMove, handleChatTouchEnd,
     handleEndChatConfirmation,
     isAtBottom, updateScrollButton,
