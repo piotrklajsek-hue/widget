@@ -1,0 +1,112 @@
+@import './fonts.css';
+@import './tailwind.css';
+@import './theme.css';
+
+/* ───────────────────────────────────────────────────────────
+   All custom styles scoped to .locly-widget
+   so they won't leak to a host page when the widget is embedded
+   ─────────────────────────────────────────────────────────── */
+
+/* Disable any effects on search bar textarea */
+.locly-widget .search-textarea,
+.locly-widget .search-textarea:hover,
+.locly-widget .search-textarea:focus,
+.locly-widget .search-textarea:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+/* White glow on focus and hover for inputs/textareas - exclude search bar */
+.locly-widget input:not(.search-textarea):not(.no-glow),
+.locly-widget textarea:not(.search-textarea):not(.no-glow) {
+  border: 1px solid transparent !important;
+}
+
+.locly-widget input:not(.search-textarea):not(.no-glow):hover:not(:focus),
+.locly-widget textarea:not(.search-textarea):not(.no-glow):hover:not(:focus) {
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1) !important;
+  outline: none !important;
+  border: 1px solid transparent !important;
+}
+
+.locly-widget input:not(.search-textarea):not(.no-glow):focus,
+.locly-widget textarea:not(.search-textarea):not(.no-glow):focus,
+.locly-widget input:not(.search-textarea):not(.no-glow):focus-visible,
+.locly-widget textarea:not(.search-textarea):not(.no-glow):focus-visible {
+  outline: none !important;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.3) !important;
+  border: 1px solid rgba(255, 255, 255, 0.5) !important;
+}
+
+/* Sonner toast positioning — scoped to .locly-widget so they
+   won't clash with a host page that also uses Sonner.
+   Inside Shadow DOM the Toaster renders within the shadow tree,
+   so .locly-widget ancestor selector guarantees isolation. */
+.locly-widget [data-sonner-toaster][data-y-position="bottom"] {
+  left: 0 !important;
+  right: 0 !important;
+  bottom: var(--offset-bottom, 50px) !important;
+  width: 100% !important;
+  display: flex !important;
+  justify-content: center !important;
+  transform: none !important;
+}
+
+@media (max-width: 767px) {
+  .locly-widget [data-sonner-toaster][data-y-position="bottom"] {
+    bottom: 25px !important;
+  }
+}
+
+.locly-widget [data-sonner-toaster] > ol {
+  width: 100% !important;
+  max-width: 560px !important;
+  margin: 0 auto !important;
+  padding: 0 16px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+}
+
+.locly-widget [data-sonner-toast] {
+  max-width: none !important;
+  width: fit-content !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+/* ───────────────────────────────────────────────────────────
+   WIDGET EMBEDDING — CSS ISOLATION AUDIT
+   ─────────────────────────────────────────────────────────────
+
+   TWO-LAYER isolation:
+
+   LAYER 1 — Shadow DOM (ShadowDOMWrapper.tsx)
+   ✅ Only WIDGET-owned <style>/<link> cloned into shadow root
+   ✅ Host-page styles identified via snapshot + heuristic, NEVER touched
+   ✅ Widget originals disabled (media="not all") — no CSS leaks to host
+   ✅ :root → :host rewriting for Tailwind theme vars
+   ✅ @keyframes encapsulated inside shadow root
+   ✅ Host page CSS cannot cascade into widget
+   ✅ ShadowRootContext for Radix UI portal containment
+
+   LAYER 2 — CSS scoping (.locly-widget)
+   ✅ CSS variables scoped to .locly-widget
+   ✅ Preflight/reset scoped to .locly-widget *
+   ✅ Sonner selectors scoped to .locly-widget [data-sonner-*]
+   ✅ Stacking context via isolation:isolate
+   ✅ @theme inline avoids :root dependency
+   ✅ --tw-* fallback vars on .locly-widget (theme.css)
+
+   DOM API AUDIT:
+   ✅ document.querySelector('[data-widget-container]') → replaced with ref
+   ✅ document.addEventListener('paste') — composed event, crosses shadow
+   ⚠️ document.body scroll lock — intentional, modifies host body
+   ✅ window.* APIs (scroll, matchMedia, location) — unaffected
+   ✅ navigator.* APIs (vibrate, geolocation, mediaDevices) — unaffected
+
+   REMAINING GLOBAL (by design, harmless):
+   ℹ️ @property declarations (tw-animate-css) — CSS spec, idempotent
+   ℹ️ @font-face (Google Fonts) — shared resources
+   ─────────────────────────────────────────────────────────── */
