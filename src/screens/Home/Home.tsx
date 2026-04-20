@@ -3848,8 +3848,15 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                       </div>
                     </div>
                     )}
+
+                  {/* Bottom spacer: reserves vertical room so the just-sent
+                      user message can be pinned ~30px from the scroll-container
+                      top edge (ChatGPT/Claude style). Matches /projects/3 AiPanel. */}
+                  {chatMessages.length > 0 && (
+                    <div style={{ minHeight: '60vh', flexShrink: 0 }} aria-hidden />
+                  )}
                   </div>
-                
+
                   {/* Scroll to bottom button */}
                   <AnimatePresence>
                     {showScrollToBottom && (
@@ -5279,8 +5286,12 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                                 </div>
                               </div>
                             )}
+
+                            {chatMessages.length > 0 && (
+                              <div style={{ minHeight: '60vh', flexShrink: 0 }} aria-hidden />
+                            )}
                           </div>
-                          
+
                           {/* Mobile Scroll to bottom button */}
                           <AnimatePresence>
                             {showMobileScrollToBottom && (

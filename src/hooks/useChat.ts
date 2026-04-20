@@ -145,31 +145,24 @@ export function useChat() {
     return count;
   }, [chatMessages]);
 
-  // Scroll user message to top with 30px offset (ChatGPT-style)
+  // Pin a just-sent user message ~30px below the scroll-container's top edge
+  // (ChatGPT/Claude-style). Uses getBoundingClientRect so it works regardless
+  // of positioned-ancestor quirks (the chat container isn't position:relative).
+  const pinMessageToTop = (container: HTMLDivElement, messageId: string) => {
+    const messageEl = container.querySelector(`[data-message-id="${messageId}"]`) as HTMLElement | null;
+    if (!messageEl) return;
+    const msgRect = messageEl.getBoundingClientRect();
+    const containerRect = container.getBoundingClientRect();
+    const delta = msgRect.top - containerRect.top - 30;
+    container.scrollTo({ top: container.scrollTop + delta, behavior: "smooth" });
+  };
+
   const scrollUserMessageToTop = useCallback((messageId: string) => {
-    // Wait for DOM update and layout
+    // Double-rAF: wait for React commit + browser layout before measuring
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
-        if (chatMessagesRef.current) {
-          const container = chatMessagesRef.current;
-          const messageEl = container.querySelector(`[data-message-id="${messageId}"]`) as HTMLElement;
-          if (messageEl) {
-            // Calculate scroll position to put message 30px from container top
-            // Account for container's paddingTop
-            const containerPaddingTop = parseInt(getComputedStyle(container).paddingTop) || 0;
-            const targetScrollTop = messageEl.offsetTop - 30 - containerPaddingTop;
-            container.scrollTo({ top: targetScrollTop, behavior: 'smooth' });
-          }
-        }
-        if (mobileChatContainerRef.current) {
-          const container = mobileChatContainerRef.current;
-          const messageEl = container.querySelector(`[data-message-id="${messageId}"]`) as HTMLElement;
-          if (messageEl) {
-            const containerPaddingTop = parseInt(getComputedStyle(container).paddingTop) || 0;
-            const targetScrollTop = messageEl.offsetTop - 30 - containerPaddingTop;
-            container.scrollTo({ top: targetScrollTop, behavior: 'smooth' });
-          }
-        }
+        if (chatMessagesRef.current) pinMessageToTop(chatMessagesRef.current, messageId);
+        if (mobileChatContainerRef.current) pinMessageToTop(mobileChatContainerRef.current, messageId);
       });
     });
   }, []);
