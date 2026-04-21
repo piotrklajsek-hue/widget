@@ -3974,21 +3974,7 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                         }}
                         onKeyDown={handleMobileChatKeyDown}
                       />
-                      <div className="flex items-center justify-between mt-1.5">
-                        <div className="flex items-center gap-1">
-                          <button 
-                            className="text-white/50 hover:text-white p-1.5 rounded-lg transition-all"
-                            onClick={handleAddImageClick}
-                          >
-                            <Plus className="w-4 h-4" />
-                          </button>
-                          <button 
-                            className="text-gray-400/70 hover:text-gray-500 p-1.5 rounded-lg transition-all"
-                            onClick={handleMockVoiceInput}
-                          >
-                            <Mic className="w-4 h-4" />
-                          </button>
-                        </div>
+                      <div className="flex items-center justify-end mt-1.5">
                         <button
                           onClick={handleMobileChatSubmit}
                           disabled={mobileInputValue.trim().length === 0}
@@ -4478,32 +4464,8 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                     paddingBottom: '8px'
                   }}
                 >
-                  {/* Plus Button - hidden on mobile (multiline) */}
-                  <div 
-                    ref={plusAnchorRef}
-                    className="relative hidden md:block"
-                    onMouseEnter={() => setIsHoveringPlusButton(true)}
-                    onMouseLeave={() => setIsHoveringPlusButton(false)}
-                  >
-                    <button 
-                      className="flex-shrink-0 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-full transition-all p-2" 
-                      onClick={handleAddImageClick}
-                    >
-                      <Plus className="w-5 h-5" />
-                    </button>
-                    
-                  </div>
-                  
                   {/* Spacer to push controls to the right */}
                   <div className="flex-grow hidden md:block"></div>
-                  
-                  {/* Mobile-only Plus button (multiline) */}
-                  <button 
-                    className="flex-shrink-0 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-full transition-all p-2 md:hidden" 
-                    onClick={handleAddImageClick}
-                  >
-                    <Plus className="w-5 h-5" />
-                  </button>
                   
                   {/* Right side controls */}
                   <div className="flex items-center gap-2">
@@ -4542,35 +4504,18 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                 )}
                 </AnimatePresence>
                 
-                {/* 🧪 Mock mic button - hidden when typing */}
-                {inputValue.length === 0 && (
-                <motion.button
-                  whileTap={{ scale: 0.95 }}
-                  className="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-all text-gray-500 hover:text-gray-700 hover:bg-gray-100 relative"
-                  onClick={handleMockVoiceInput}
-                >
-                  <Mic className="w-5 h-5" />
-                  <span className="absolute -top-1 -right-1 text-[8px] bg-gray-400/70 text-white rounded-full w-3.5 h-3.5 flex items-center justify-center" style={{ lineHeight: 1 }}>T</span>
-                </motion.button>
-                )}
-
-                  {/* 🔧 BLOKADA MIKROFONU (wyłączona na czas testów)
-                      Aby ponownie włączyć: przywróć warunek micPermission === 'denied'
-                      w className, onClick, title i warunkowe renderowanie MicOff */}
-                  {/* Mic / Send — single DOM element, no mount/unmount flash */}
+                  {/* Send — only visible when typing */}
+                  {inputValue.length > 0 && (
                   <button
-                    className={`flex-shrink-0 w-8 h-8 flex items-center justify-center ${
-                      inputValue.length === 0
-                        ? 'rounded-full text-gray-500 hover:text-gray-700 hover:bg-gray-100'
-                        : 'rounded-full'
-                    }`}
-                    style={inputValue.length > 0 ? { backgroundColor: '#000' } : undefined}
-                    onMouseEnter={inputValue.length > 0 ? (e) => { (e.currentTarget as HTMLElement).style.filter = 'brightness(0.9)'; } : undefined}
-                    onMouseLeave={inputValue.length > 0 ? (e) => { (e.currentTarget as HTMLElement).style.filter = 'none'; } : undefined}
-                    onClick={inputValue.length === 0 ? handleSearchVoiceInput : () => handleSubmit()}
+                    className="flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-full"
+                    style={{ backgroundColor: '#000' }}
+                    onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.filter = 'brightness(0.9)'; }}
+                    onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.filter = 'none'; }}
+                    onClick={() => handleSubmit()}
                   >
-                    {inputValue.length === 0 ? <Mic className="w-5 h-5" /> : <ArrowUp className="w-4 h-4 text-white" />}
+                    <ArrowUp className="w-4 h-4 text-white" />
                   </button>
+                  )}
                   </div>
                   
                   {/* Mobile spacer + send at end (multiline) */}
@@ -4593,21 +4538,6 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
               ) : (
                 /* Single-line: Separate buttons */
                 <>
-                  {/* Plus Button - hidden on mobile */}
-                  <div 
-                    ref={plusAnchorRef}
-                    className="relative hidden md:block"
-                    style={{ order: 1 }}
-                    onMouseEnter={() => setIsHoveringPlusButton(true)}
-                    onMouseLeave={() => setIsHoveringPlusButton(false)}
-                  >
-                    <button 
-                      className="flex-shrink-0 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-full transition-all p-2" 
-                      onClick={handleAddImageClick}
-                    >
-                      <Plus className="w-5 h-5" />
-                    </button>
-                  </div>
                   
                   {/* Desktop inline image thumbnails */}
                   {images.length > 0 && (
@@ -4635,14 +4565,6 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                   
                   {/* Right side controls */}
                   <div className="flex items-center gap-2 w-full md:w-auto flex-shrink-0" style={{ order: 3 }}>
-                    {/* Mobile-only Plus button */}
-                    <button 
-                      className="flex-shrink-0 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-full transition-all p-2 md:hidden" 
-                      onClick={handleAddImageClick}
-                    >
-                      <Plus className="w-5 h-5" />
-                    </button>
-                    
                     {/* Active Chat Badge - separate - only show after overlay has been closed */}
                     <AnimatePresence>
                     {chatMessages.length > 0 && hasClosedChat && !inputValue && !showChatOverlay && (
@@ -4678,32 +4600,18 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                     )}
                     </AnimatePresence>
                     
-                    {/* 🧪 Mock mic button (single-line) - hidden when typing */}
-                    {inputValue.length === 0 && (
-                    <motion.button
-                      whileTap={{ scale: 0.95 }}
-                      className="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-all text-gray-500 hover:text-gray-700 hover:bg-gray-100 relative"
-                      onClick={handleMockVoiceInput}
-                    >
-                      <Mic className="w-5 h-5" />
-                      <span className="absolute -top-1 -right-1 text-[8px] bg-gray-400/70 text-white rounded-full w-3.5 h-3.5 flex items-center justify-center" style={{ lineHeight: 1 }}>T</span>
-                    </motion.button>
-                    )}
-
-                    {/* Mic / Send — single DOM element, no mount/unmount flash */}
+                    {/* Send — only visible when typing */}
+                    {inputValue.length > 0 && (
                     <button
-                      className={`flex-shrink-0 w-8 h-8 flex items-center justify-center ${
-                        inputValue.length === 0
-                          ? 'rounded-full text-gray-500 hover:text-gray-700 hover:bg-gray-100'
-                          : 'rounded-full'
-                      }`}
-                      style={inputValue.length > 0 ? { backgroundColor: '#000' } : undefined}
-                      onMouseEnter={inputValue.length > 0 ? (e) => { (e.currentTarget as HTMLElement).style.filter = 'brightness(0.9)'; } : undefined}
-                      onMouseLeave={inputValue.length > 0 ? (e) => { (e.currentTarget as HTMLElement).style.filter = 'none'; } : undefined}
-                      onClick={inputValue.length === 0 ? handleSearchVoiceInput : () => handleSubmit()}
+                      className="flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-full"
+                      style={{ backgroundColor: '#000' }}
+                      onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.filter = 'brightness(0.9)'; }}
+                      onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.filter = 'none'; }}
+                      onClick={() => handleSubmit()}
                     >
-                      {inputValue.length === 0 ? <Mic className="w-5 h-5" /> : <ArrowUp className="w-4 h-4 text-white" />}
+                      <ArrowUp className="w-4 h-4 text-white" />
                     </button>
+                    )}
                     
                     {/* Mobile spacer to center avatars */}
                     {showSocialProof && <div className="flex-grow md:hidden" />}
@@ -6230,24 +6138,6 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                         
                         {/* Controls Row */}
                         <div className="flex items-center gap-2 mt-1 pt-1 flex-shrink-0">
-                          {/* Add Image */}
-                          <button 
-                            className="p-2 text-white/50 hover:text-white hover:bg-white/10 rounded-full transition-all"
-                            onClick={handleAddImageClick}
-                          >
-                            <Plus className="w-5 h-5" />
-                          </button>
-                          
-                          
-                          {/* Mic */}
-                          {inputValue.length === 0 && (
-                            <button
-                              className="w-8 h-8 flex items-center justify-center text-white/50 hover:text-white hover:bg-white/10 rounded-lg transition-all"
-                              onClick={handleSearchVoiceInput}
-                            >
-                              <Mic className="w-5 h-5" />
-                            </button>
-                          )}
 
                           {/* Chat resume icon - right after mic */}
                           {mobileView === 'search' && chatMessages.length > 0 && !isChatEnded && (
