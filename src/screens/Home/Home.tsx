@@ -2,7 +2,7 @@
  * LoclyWidget - Main widget component (v2.0)
  */
 import React, { useState, useEffect, useRef } from 'react';
-import { Mic, Settings, ArrowUp, ArrowDown, X, Star, Plus, MessageSquare, Search, ArrowLeft, Loader2, Check, ExternalLink, MicOff, MoreHorizontal, Mail, Volume2, VolumeX, Frown } from 'lucide-react';
+import { Mic, Settings, ArrowUp, ArrowDown, X, Star, Plus, MessageSquare, Search, ArrowLeft, Loader2, Check, ExternalLink, MicOff, MoreHorizontal, Mail, Volume2, VolumeX, Frown, Lock } from 'lucide-react';
 import { FaFacebook, FaGoogle, FaTiktok } from 'react-icons/fa';
 import { motion, AnimatePresence } from 'motion/react';
 import { useOptionalSearchParams } from '../../hooks/useOptionalRouter';
@@ -4060,113 +4060,10 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                       </button>
                     ))}
                   </div>
-                  {/* Logo and tagline at bottom - centered */}
-                  <div className="mt-4 flex flex-col items-center gap-2">
-                    <div className="flex items-center justify-center gap-2">
-                      <div className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: '#0B9BFF' }}>
-                        <svg className="w-4 h-4 text-white" viewBox="0 0 24 24" fill="currentColor">
-                          <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
-                        </svg>
-                      </div>
-                      <p className="text-white/40 text-xs leading-relaxed">
-                        <a href="https://locly.pl" target="_blank" rel="noopener noreferrer" className="text-white hover:text-white/70 transition-all">locly</a> znajdzie informację lub zgłosi jej brak właścicielowi.
-                      </p>
-                    </div>
-                    <button
-                      onClick={() => {
-                        setShowPopularSearches(false);
-                        setShowHowItWorksOverlay(true);
-                      }}
-                      className="text-white hover:opacity-80 text-xs transition-opacity"
-                    >
-                      Jak to działa?
-                    </button>
-                  </div>
                 </motion.div>
               )}
             </AnimatePresence>
 
-            {/* Privacy Disclaimer — separate container between popular searches and widget */}
-            <AnimatePresence>
-              {showPrivacyDisclaimer && isSearchExpanded && showPopularSearches && !inputValue && !showChatOverlay && !showRecommendations && !showAuthModal && !showAboutModal && !showWebsiteInput && (
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 10 }}
-                  transition={{ duration: 0.2 }}
-                  className="pointer-events-auto"
-                  style={{ padding: '16px', backgroundColor: 'rgba(15, 15, 15, 0.6)', backdropFilter: 'blur(50px)', WebkitBackdropFilter: 'blur(50px)', border: 'none', borderRadius: '24px', boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3), 0 2px 8px rgba(0, 0, 0, 0.2)' }}
-                  onMouseDown={(e) => { if (!(e.target instanceof HTMLButtonElement || e.target instanceof HTMLAnchorElement || (e.target as HTMLElement).closest?.('button, a'))) e.preventDefault(); }}
-              >
-                <div className="flex items-start gap-2">
-                  <p className="text-white/40 leading-relaxed flex-1" style={{ fontSize: '12px' }}>
-                    Korzystając z widgetu AI, wyrażasz zgodę na naszą{' '}
-                    <span
-                      className="relative inline-block"
-                      onMouseEnter={() => {
-                        if (privacyTooltipTimeout.current) {
-                          clearTimeout(privacyTooltipTimeout.current);
-                          privacyTooltipTimeout.current = null;
-                        }
-                        setShowPrivacyTooltip(true);
-                      }}
-                      onMouseLeave={() => {
-                        if (privacyTooltipTimeout.current) {
-                          clearTimeout(privacyTooltipTimeout.current);
-                        }
-                        privacyTooltipTimeout.current = setTimeout(() => setShowPrivacyTooltip(false), 150);
-                      }}
-                    >
-                      <a
-                        href="https://locly.pl/privacy"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-white hover:text-white/70 transition-all"
-                      >Politykę Prywatności</a>
-                      <AnimatePresence>
-                        {showPrivacyTooltip && (
-                          <motion.span
-                            initial={{ opacity: 0, y: 5, x: '-50%' }}
-                            animate={{ opacity: 1, y: 0, x: '-50%' }}
-                            exit={{ opacity: 0, y: 5, x: '-50%' }}
-                            transition={{ duration: 0.2 }}
-                            className="absolute bottom-full left-1/2 mb-1 w-72 text-white text-[11px] leading-relaxed rounded-lg px-4 py-3 z-[9999]"
-                            style={{ backgroundColor: '#27272B' }}
-                            onMouseEnter={() => {
-                              if (privacyTooltipTimeout.current) {
-                                clearTimeout(privacyTooltipTimeout.current);
-                                privacyTooltipTimeout.current = null;
-                              }
-                            }}
-                            onMouseLeave={() => {
-                              if (privacyTooltipTimeout.current) {
-                                clearTimeout(privacyTooltipTimeout.current);
-                              }
-                              privacyTooltipTimeout.current = setTimeout(() => setShowPrivacyTooltip(false), 150);
-                            }}
-                          >
-                            Korzystając z widgetu AI, wyrażasz zgodę na monitorowanie i zapisywanie tej rozmowy w celu świadczenia naszych usług oraz przetwarzanie Twoich danych osobowych zgodnie z naszą Polityką Prywatności. Zobacz naszą{' '}
-                            <a href="https://locly.pl/privacy" target="_blank" rel="noopener noreferrer" className="text-white underline hover:text-white/70 transition-all">Politykę Prywatności</a>.
-                          </motion.span>
-                        )}
-                      </AnimatePresence>
-                    </span>.
-                  </p>
-                  <button
-                    onMouseDown={(e) => {
-                      e.preventDefault();
-                      e.stopPropagation();
-                      setShowPrivacyDisclaimer(false);
-                      localStorage.setItem('locly_privacy_dismissed', 'true');
-                    }}
-                    className="text-white/40 hover:text-white/70 transition-colors flex-shrink-0 mt-0.5 active:scale-90"
-                  >
-                    <X className="w-3.5 h-3.5" />
-                  </button>
-                </div>
-              </motion.div>
-            )}
-            </AnimatePresence>
 
           </div>
 
@@ -4289,29 +4186,15 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                   }}
                   onMouseEnter={() => setIsHoveringAvatars(true)}
                   onMouseLeave={() => setIsHoveringAvatars(false)}
-                  onClick={() => {
-                    setShowAddOpinionModal(false);
-                    setIsSearchExpanded(true);
-                    expandedByClickRef.current = true;
-                    if (!showRecommendations) {
-                      if (showChatOverlay) instantModalRef.current = true;
-                      setShowChatOverlay(false);
-                      onToggle?.(false);
-                      if (chatMessages.length > 0) {
-                        setHasClosedChat(true);
-                      }
-                      analytics.trackRecommendationsOpened();
-                      setShowRecommendations(true);
-                      clearAutoCollapseTimer();
-                    }
-                  }}
                 >
-                  {hasOpinion ? (
+                  {isHoveringAvatars ? (
+                    <Lock className="w-3.5 h-3.5 text-gray-500" />
+                  ) : hasOpinion ? (
                     <Check className="w-3.5 h-3.5 text-green-500" />
                   ) : isRecommended ? (
                     <Star className="w-3.5 h-3.5" fill="#DC8400" stroke="#DC8400" />
                   ) : (
-                    <Star className="w-3.5 h-3.5 transition-colors text-gray-400 group-hover:text-black" fill="currentColor" stroke="currentColor" />
+                    <Star className="w-3.5 h-3.5 text-gray-400" fill="currentColor" stroke="currentColor" />
                   )}
                   <div className="flex items-center -space-x-1.5" style={{ marginRight: '2px' }}>
                     <img src={imgOvalCopy2} alt="User 1" className="w-6 h-6 rounded-full object-cover" />
@@ -4360,11 +4243,7 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                 </span>
               )}
               <div
-                className="flex items-center gap-1 bg-[#27272B] rounded-full py-0.5 px-1.5 cursor-pointer hover:bg-[#333336] transition-colors"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  toggleRecommendations();
-                }}
+                className="flex items-center gap-1 bg-[#27272B] rounded-full py-0.5 px-1.5"
               >
                 {hasOpinion ? (
                   <Check className="w-3 h-3 text-green-400" />
@@ -4851,23 +4730,11 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                           paddingRight: '6px',
                           ...(!hasOpinion && !isRecommended && isHovering ? { backgroundColor: '#F2F2F2' } : {})
                         }}
-                        onClick={() => {
-                          analytics.trackAvatarClicked();
-                          if (!showRecommendations) {
-                            if (showChatOverlay) instantModalRef.current = true;
-                            setShowChatOverlay(false);
-                            onToggle?.(false);
-                            if (chatMessages.length > 0) {
-                              setHasClosedChat(true);
-                            }
-                            analytics.trackRecommendationsOpened();
-                            setShowRecommendations(true);
-                            clearAutoCollapseTimer();
-                          }
-                        }}
                       >
                         {/* Rating Icon */}
-                        {hasOpinion ? (
+                        {isHovering ? (
+                          <Lock className="w-4 h-4 text-gray-500" />
+                        ) : hasOpinion ? (
                           <Check className="w-4 h-4 text-green-500" />
                         ) : isRecommended ? (
                           <Star className="w-4 h-4" fill="#DC8400" stroke="#DC8400" />
@@ -4932,7 +4799,7 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
           {/* Tooltips rendered OUTSIDE motion.div to escape overflow:hidden + transform containing block */}
           <WidgetTooltip visible={isHoveringLogo} text="O aplikacji" anchorRef={logoAnchorRef} />
           <WidgetTooltip visible={isHoveringPlusButton} text="Dodaj zdjęcie" anchorRef={plusAnchorRef} />
-          <WidgetTooltip visible={isHovering} text="Zobacz kto ze znajomych poleca" anchorRef={expandedAvatarsAnchorRef} />
+          <WidgetTooltip visible={isHovering} text="Dostępne wkrótce" anchorRef={expandedAvatarsAnchorRef} />
 
           
           {/* Mobile Full-Screen Search Overlay */}
