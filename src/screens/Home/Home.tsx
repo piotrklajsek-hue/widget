@@ -2598,7 +2598,7 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 10 }}
                 transition={{ duration: 0.2 }}
-                className="absolute bottom-full mb-2.5 left-1/2 -translate-x-1/2 w-[576px] max-w-[calc(100vw-32px)] h-[504px] rounded-2xl flex flex-col"
+                className="absolute bottom-full mb-2.5 left-1/2 -translate-x-1/2 w-[576px] max-w-[calc(100vw-32px)] h-[440px] rounded-2xl flex flex-col"
                 style={{ backgroundColor: 'rgba(15, 15, 15, 0.6)', backdropFilter: 'blur(50px)', WebkitBackdropFilter: 'blur(50px)', border: 'none', borderRadius: '24px', boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3), 0 2px 8px rgba(0, 0, 0, 0.2)', overflow: 'hidden' }}
               >
                 {/* Header */}
@@ -3135,7 +3135,7 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                 transition={{ duration: 0.2 }}
                 onMouseEnter={handleWidgetMouseEnter}
                 onMouseLeave={handleWidgetMouseLeave}
-                className="absolute bottom-full mb-2.5 left-1/2 -translate-x-1/2 w-[576px] max-w-[calc(100vw-32px)] h-[504px] rounded-2xl flex flex-col"
+                className="absolute bottom-full mb-2.5 left-1/2 -translate-x-1/2 w-[576px] max-w-[calc(100vw-32px)] h-[440px] rounded-2xl flex flex-col"
                 style={{ backgroundColor: 'rgba(15, 15, 15, 0.6)', backdropFilter: 'blur(50px)', WebkitBackdropFilter: 'blur(50px)', border: 'none', borderRadius: '24px', boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3), 0 2px 8px rgba(0, 0, 0, 0.2)', overflow: 'hidden', zIndex: instantModalRef.current ? 3 : 2 }}
               >
                 {/* Header */}
@@ -3554,7 +3554,7 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                     ? { type: 'spring', damping: 28, stiffness: 300 } 
                     : { duration: 0.2 }
                 }
-                className="fixed inset-0 z-50 bg-[#18181B] flex flex-col md:absolute md:inset-auto md:bottom-full md:mb-2.5 md:left-1/2 md:-translate-x-1/2 md:w-[576px] md:max-w-[calc(100vw-32px)] md:h-[504px] md:rounded-2xl overflow-hidden md:z-auto"
+                className="fixed inset-0 z-50 bg-[#18181B] flex flex-col md:absolute md:inset-auto md:bottom-full md:mb-2.5 md:left-1/2 md:-translate-x-1/2 md:w-[576px] md:max-w-[calc(100vw-32px)] md:h-[440px] md:rounded-2xl overflow-hidden md:z-auto"
                 style={!isMobileDevice ? { backgroundColor: 'rgba(15, 15, 15, 0.6)', backdropFilter: 'blur(50px)', WebkitBackdropFilter: 'blur(50px)', borderRadius: '24px', boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3), 0 2px 8px rgba(0, 0, 0, 0.2)', zIndex: instantModalRef.current ? 3 : 2 } : undefined}
                 // On mobile: full screen via fixed inset-0; maxHeight only on md+ via Tailwind
               >
