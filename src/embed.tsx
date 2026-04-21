@@ -61,6 +61,10 @@ import { Toaster } from 'sonner';
 import { LoclyWidget } from './components/LoclyWidget';
 import { ShadowDOMWrapper } from './components/ShadowDOMWrapper';
 import type { LoclyWidgetProps } from './components/LoclyWidgetProps';
+// Pull in Tailwind + theme + widget-scoped styles so the embed bundle
+// ships with CSS (vite-plugin-css-injected-by-js will inline + inject
+// them into document.head at runtime).
+import './styles/index.css';
 
 // Read config from global variable (set by host page before this script loads)
 declare global {

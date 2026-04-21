@@ -102,10 +102,10 @@ const VITE_WIDGET_PATTERNS = [
 ];
 
 function isWidgetStyle(el: HTMLStyleElement | HTMLLinkElement): boolean {
-  // ── 0. Embed (IIFE) build: the css-injected-by-js plugin tags our
-  //    bundled stylesheet with this attribute. Wins over any other check
-  //    because it's a first-party marker. ──
-  if (el.hasAttribute('data-locly-widget-css')) return true;
+  // ── 0. Embed (IIFE) build: css-injected-by-js plugin sets id on our
+  //    bundled stylesheet. Wins over any other check because it's a
+  //    first-party marker. ──
+  if (el.id === 'locly-widget-css') return true;
 
   // ── 1. Vite dev mode: data-vite-dev-id is most reliable ──
   const viteId = el.getAttribute('data-vite-dev-id') || '';

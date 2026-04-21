@@ -26,18 +26,9 @@ export default defineConfig(({ mode }) => {
       react(),
       tailwindcss(),
       // Only inline CSS into JS for the embed build so a single <script>
-      // tag is all a host page needs to load.
-      ...(isEmbed
-        ? [
-            cssInjectedByJsPlugin({
-              // Mark the injected <style> so ShadowDOMWrapper can recognize
-              // it as widget-owned (otherwise the early-execution timing
-              // causes it to be classified as host-owned by snapshot).
-              injectCode: (cssCode) =>
-                `try { if (typeof document !== 'undefined') { var elStyle = document.createElement('style'); elStyle.setAttribute('data-locly-widget-css','1'); elStyle.appendChild(document.createTextNode(${cssCode})); document.head.appendChild(elStyle); } } catch (e) { console.error(e); }`,
-            }),
-          ]
-        : []),
+      // tag is all a host page needs to load. The plugin generates a
+      // <style> tag without a marker; we tag it post-mount in embed.tsx.
+      ...(isEmbed ? [cssInjectedByJsPlugin({ styleId: 'locly-widget-css' })] : []),
     ],
     resolve: {
       alias: {
