@@ -270,14 +270,6 @@ export function ShadowDOMWrapper({
     return () => {
       observer.disconnect();
       contentObserver.disconnect();
-
-      // Re-enable our disabled styles (HMR full-page reload support)
-      document.head
-        .querySelectorAll(`[${DISABLED_ATTR}]`)
-        .forEach((el) => {
-          (el as HTMLStyleElement | HTMLLinkElement).media = '';
-          el.removeAttribute(DISABLED_ATTR);
-        });
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
