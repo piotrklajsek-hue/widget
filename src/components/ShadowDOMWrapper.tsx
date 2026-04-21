@@ -32,6 +32,7 @@ import {
   useRef,
   useState,
   useEffect,
+  useLayoutEffect,
   useCallback,
   type ReactNode,
 } from 'react';
@@ -210,7 +211,7 @@ export function ShadowDOMWrapper({
 
   /* ── Lifecycle ─────────────────────────────────────────────────────── */
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const host = hostRef.current;
     if (!host || shadowRef.current) return;
 
