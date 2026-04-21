@@ -84,7 +84,7 @@ function EmbeddedWidget() {
 
   return (
     <React.StrictMode>
-      <ShadowDOMWrapper className="locly-widget-embed">
+      <ShadowDOMWrapper className="locly-widget">
         <LoclyWidget {...config} />
         <Toaster
           position="bottom-center"

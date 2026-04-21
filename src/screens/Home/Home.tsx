@@ -4101,7 +4101,7 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                 <div className="flex items-start gap-2">
                   <p className="text-white/40 leading-relaxed flex-1" style={{ fontSize: '12px' }}>
                     Korzystając z widgetu AI, wyrażasz zgodę na naszą{' '}
-                    <span 
+                    <span
                       className="relative inline-block"
                       onMouseEnter={() => {
                         if (privacyTooltipTimeout.current) {
@@ -4167,8 +4167,9 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
               </motion.div>
             )}
             </AnimatePresence>
+
           </div>
-          
+
           <motion.div
             ref={searchBarRef}
             className={`p-2 md:py-0 md:px-2 rounded-2xl ${showChatOverlay || showMobileSearch ? 'hidden md:block' : ''}`}
@@ -4861,7 +4862,6 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                             }
                             analytics.trackRecommendationsOpened();
                             setShowRecommendations(true);
-                            // Clear any pending timer when opening
                             clearAutoCollapseTimer();
                           }
                         }}
@@ -6371,14 +6371,6 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                             <Plus className="w-5 h-5" />
                           </button>
                           
-                          {/* Mock Mic */}
-                          <button
-                            className="w-8 h-8 flex items-center justify-center text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-full transition-all relative"
-                            onClick={handleMockVoiceInput}
-                          >
-                            <Mic className="w-5 h-5" />
-                            <span className="absolute -top-1 -right-1 text-[8px] bg-gray-400/70 text-white rounded-full w-3.5 h-3.5 flex items-center justify-center" style={{ lineHeight: 1 }}>T</span>
-                          </button>
                           
                           {/* Mic */}
                           {inputValue.length === 0 && (
@@ -6389,7 +6381,7 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                               <Mic className="w-5 h-5" />
                             </button>
                           )}
-                          
+
                           {/* Chat resume icon - right after mic */}
                           {mobileView === 'search' && chatMessages.length > 0 && !isChatEnded && (
                             <motion.button
