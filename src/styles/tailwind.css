@@ -1,5 +1,8 @@
 @import 'tailwindcss/theme';
 @import 'tailwindcss/utilities';
+
+/* Scan widget source files. `@tailwindcss/vite` otherwise misses
+   classes in library-build mode (entry = embed.tsx). */
 @source '../**/*.{js,ts,jsx,tsx}';
 
 @import 'tw-animate-css';

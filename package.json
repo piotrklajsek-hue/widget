@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "build:embed": "vite build --mode embed && cp dist/embed/locly-widget.js ../3/static/locly-widget.js",
+    "build:embed": "vite build && vite build --mode embed && node scripts/patch-embed-css.mjs && cp dist/embed/locly-widget.js ../3/static/locly-widget.js",
     "preview": "vite preview",
     "typecheck": "tsc -b"
   },

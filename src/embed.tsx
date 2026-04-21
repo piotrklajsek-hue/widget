@@ -66,6 +66,12 @@ import type { LoclyWidgetProps } from './components/LoclyWidgetProps';
 // them into document.head at runtime).
 import './styles/index.css';
 
+// Direct import so @tailwindcss/vite's content scan sees Home.tsx as a
+// top-level graph node. Library builds routed through re-exports miss
+// some utility classes (fractional spacings, arbitrary values, etc.).
+import * as _homeForTailwind from './screens/Home/Home';
+void _homeForTailwind;
+
 // Read config from global variable (set by host page before this script loads)
 declare global {
   interface Window {
