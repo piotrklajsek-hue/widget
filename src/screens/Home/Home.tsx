@@ -179,6 +179,8 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
     mobileWasAtBottomRef,
     mobileAutoScrollRef,
     prevMobileLastMsgIdRef,
+    spacerRef,
+    mobileSpacerRef,
     triggerHaptic,
     playSentSound, playReceivedSound,
     scrollChatToBottom,
@@ -3737,15 +3739,13 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                       }
                     }}
                   >
-                  {chatMessages.map((message, idx) => {
-                    // Pin-room: the LAST assistant message reserves 60vh so the
-                    // previous user message can stay pinned near the top. When
-                    // a new turn starts, this class moves off the old assistant
-                    // message (no longer last) and onto the new one.
-                    const isLast = idx === chatMessages.length - 1;
-                    const pinRoom = isLast && message.role === 'assistant' ? 'min-h-[60vh]' : '';
+                  {chatMessages.map((message) => {
+                    // Pin-room is now provided by a dynamic spacer div at the
+                    // end of the list (see useChat.updateSpacerFor) — it sizes
+                    // itself only as big as needed to land the pinned message
+                    // ~30px from the top, and shrinks as AI content streams in.
                     return (
-                    <div key={message.id} data-message-id={message.id} className={`mb-5 scroll-mt-4 ${pinRoom}`}>
+                    <div key={message.id} data-message-id={message.id} className="mb-5 scroll-mt-4">
                       <div
                         className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
                       >
@@ -3829,10 +3829,9 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                     );
                   })}
 
-                  {/* Typing Indicator — also claims 60vh of pin-room while
-                      the assistant message doesn't exist yet. */}
+                  {/* Typing Indicator — dynamic spacer below provides pin-room. */}
                   {isTyping && (
-                    <div className="mb-3 min-h-[60vh]">
+                    <div className="mb-3">
                       <div className="flex justify-start">
                         <div className="max-w-[80%] rounded-2xl px-4 py-3 bg-white/10">
                           <div className="flex gap-1.5">
@@ -3871,6 +3870,9 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                       </div>
                     </div>
                     )}
+
+                  {/* Dynamic pin spacer — height managed by useChat */}
+                  <div ref={spacerRef} style={{ height: 0, flexShrink: 0 }} />
 
                   </div>
 
@@ -5200,11 +5202,10 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                               WebkitMaskImage: 'linear-gradient(transparent 0px, transparent 40px, black 64px, black calc(100% - 16px), transparent 100%)',
                             }}
                           >
-                            {chatMessages.map((message, idx) => {
-                              const isLast = idx === chatMessages.length - 1;
-                              const pinRoom = isLast && message.role === 'assistant' ? 'min-h-[60vh]' : '';
+                            {chatMessages.map((message) => {
+                              // Pin-room via dynamic spacer at end (see useChat.updateSpacerFor)
                               return (
-                              <div key={message.id} data-message-id={message.id} className={`mb-5 scroll-mt-4 ${pinRoom}`}>
+                              <div key={message.id} data-message-id={message.id} className="mb-5 scroll-mt-4">
                                 <div className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}>
                                   {message.role === 'assistant' && message.answerData ? (
                                     <AIAnswerCard
@@ -5284,9 +5285,9 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                               );
                             })}
 
-                            {/* Typing Indicator */}
+                            {/* Typing Indicator — pin-room via dynamic spacer below */}
                             {isTyping && (
-                              <div className="mb-3 min-h-[60vh]">
+                              <div className="mb-3">
                                 <div className="flex justify-start">
                                   <div className="max-w-[80%] rounded-2xl px-4 py-3 bg-white/10">
                                     <div className="flex gap-1.5">
@@ -5310,6 +5311,9 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                                 </div>
                               </div>
                             )}
+
+                            {/* Dynamic pin spacer — height managed by useChat */}
+                            <div ref={mobileSpacerRef} style={{ height: 0, flexShrink: 0 }} />
 
                           </div>
 
