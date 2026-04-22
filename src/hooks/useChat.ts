@@ -75,12 +75,6 @@ export function useChat() {
   const prevMobileLastMsgIdRef = useRef<string | null>(null);
   const mobileWasAtBottomRef = useRef(true);
   const mobileAutoScrollRef = useRef(false);
-  // Dynamic pin spacer (replaces static min-h-[60vh] on the last assistant
-  // message). Sized only as tall as needed so the just-sent user message can
-  // scroll to ~30px from the top, then shrinks as the AI response streams in.
-  const spacerRef = useRef<HTMLDivElement>(null);
-  const mobileSpacerRef = useRef<HTMLDivElement>(null);
-  const pinnedMsgIdRef = useRef<string | null>(null);
 
   // ── Haptic ──
   const triggerHaptic = useCallback((pattern: number | number[] = 10) => {
@@ -151,61 +145,19 @@ export function useChat() {
     return count;
   }, [chatMessages]);
 
-  // Pair a scroll container with its spacer div. Only one of the two
-  // containers is actually mounted at a time (desktop vs mobile layout).
-  const spacerFor = (container: HTMLDivElement): HTMLDivElement | null => {
-    if (container === chatMessagesRef.current) return spacerRef.current;
-    if (container === mobileChatContainerRef.current) return mobileSpacerRef.current;
-    return null;
-  };
-
-  // Size the spacer to exactly the amount of extra height needed so the
-  // pinned message can sit ~30px from the top of its container. As the AI
-  // response streams in, the spacer shrinks by the same amount the content
-  // grew — total scrollHeight stays constant so the pin position is stable.
-  const updateSpacerFor = (container: HTMLDivElement) => {
-    const spacer = spacerFor(container);
-    if (!spacer) return;
-    const msgId = pinnedMsgIdRef.current;
-    if (!msgId) {
-      spacer.style.height = '0';
-      return;
-    }
-    const msgEl = container.querySelector(`[data-message-id="${msgId}"]`) as HTMLElement | null;
-    if (!msgEl) {
-      spacer.style.height = '0';
-      return;
-    }
-    // getBoundingClientRect + scrollTop gives the message's absolute position
-    // in the scrollable content regardless of offsetParent.
-    const msgTop =
-      msgEl.getBoundingClientRect().top -
-      container.getBoundingClientRect().top +
-      container.scrollTop;
-    const currentSpacer = parseFloat(spacer.style.height) || 0;
-    const scrollHeightWithout = container.scrollHeight - currentSpacer;
-    const needed = Math.max(0, container.clientHeight + msgTop - 30 - scrollHeightWithout);
-    spacer.style.height = needed + 'px';
-  };
-
   // Pin a just-sent user message ~30px below the scroll-container's top edge
-  // (ChatGPT/Claude-style). The spacer is sized first so the scroll always
-  // has room to land; without it, short chats clamp scrollTo to the bottom
-  // and the pin position is never reached.
+  // (ChatGPT/Claude-style). Uses getBoundingClientRect so it works regardless
+  // of positioned-ancestor quirks (the chat container isn't position:relative).
   const pinMessageToTop = (container: HTMLDivElement, messageId: string) => {
-    pinnedMsgIdRef.current = messageId;
-    updateSpacerFor(container);
     const messageEl = container.querySelector(`[data-message-id="${messageId}"]`) as HTMLElement | null;
     if (!messageEl) return;
     const msgRect = messageEl.getBoundingClientRect();
     const containerRect = container.getBoundingClientRect();
     const delta = msgRect.top - containerRect.top - 30;
-    if (Math.abs(delta) < 0.5) return;
     container.scrollTo({ top: container.scrollTop + delta, behavior: "smooth" });
   };
 
   const scrollUserMessageToTop = useCallback((messageId: string) => {
-    pinnedMsgIdRef.current = messageId;
     // Double-rAF: wait for React commit + browser layout before measuring
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
@@ -214,28 +166,6 @@ export function useChat() {
       });
     });
   }, []);
-
-  // Shrink the spacer as AI content streams into the reserved room. MO on
-  // characterData catches each streamed chunk; RO catches container resize.
-  useEffect(() => {
-    if (!showChatOverlay) return;
-    const disposers: Array<() => void> = [];
-    const attach = (container: HTMLDivElement | null) => {
-      if (!container) return;
-      const run = () => requestAnimationFrame(() => updateSpacerFor(container));
-      const mo = new MutationObserver(run);
-      mo.observe(container, { childList: true, subtree: true, characterData: true });
-      const ro = new ResizeObserver(run);
-      ro.observe(container);
-      run();
-      disposers.push(() => mo.disconnect());
-      disposers.push(() => ro.disconnect());
-    };
-    attach(chatMessagesRef.current);
-    attach(mobileChatContainerRef.current);
-    return () => disposers.forEach(d => d());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [showChatOverlay, chatMessages.length]);
 
   // Char-by-char streaming (ChatGPT/Claude style) — matches /projects/3 AiPanel.
   const streamMessageContent = useCallback((
@@ -491,8 +421,6 @@ export function useChat() {
     mobileWasAtBottomRef,
     mobileAutoScrollRef,
     prevMobileLastMsgIdRef,
-    spacerRef,
-    mobileSpacerRef,
 
     // Handlers
     triggerHaptic,
