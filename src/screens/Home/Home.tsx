@@ -18,6 +18,7 @@ import {
   useMobileOverlay,
   useWidgetUI,
 } from '../../hooks';
+import { useChatScroll } from '../../hooks/useChatScroll';
 import Dark1920W from '../../imports/1920WDark';
 import imgOvalCopy2 from "figma:asset/641ec2f5caccbb1bfbeefca86996422307782b4a.png";
 import imgOvalCopy3 from "figma:asset/7a72b08b1356732982cab37c46a78817918fe275.png";
@@ -288,6 +289,9 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
     mobileSearchTextareaRef,
     openMobileSearch,
   } = mobile;
+
+  const desktopScroll = useChatScroll(chatMessagesRef, showChatOverlay);
+  const mobileScroll = useChatScroll(mobileChatContainerRef, showMobileSearch && mobileView === 'chat');
 
   // Desktop search bar expand/collapse state
   const [isSearchExpanded, setIsSearchExpanded] = useState(false);
@@ -959,7 +963,8 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
     playSentSound();
     lastUserMessageIdRef.current = userMessage.id;
     setUnreadScrollMessages(0);
-    scrollUserMessageToTop(userMessage.id);
+    desktopScroll.pinMessageToTop(userMessage.id);
+    mobileScroll.pinMessageToTop(userMessage.id);
     
     // Show chat overlay (desktop only) or switch to chat view (mobile)
     if (showMobileSearch) {
@@ -1959,7 +1964,8 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
       playSentSound();
       lastUserMessageIdRef.current = userMessage.id;
       setUnreadScrollMessages(0);
-      scrollUserMessageToTop(userMessage.id);
+      desktopScroll.pinMessageToTop(userMessage.id);
+    mobileScroll.pinMessageToTop(userMessage.id);
       
       setIsTyping(true);
       setTimeout(() => {
@@ -1989,7 +1995,8 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
       playSentSound();
       lastUserMessageIdRef.current = userMessage.id;
       setUnreadScrollMessages(0);
-      scrollUserMessageToTop(userMessage.id);
+      desktopScroll.pinMessageToTop(userMessage.id);
+    mobileScroll.pinMessageToTop(userMessage.id);
       
       setIsTyping(true);
       setTimeout(() => {
@@ -3713,6 +3720,7 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                     }}
                     onScroll={(e) => {
                       const el = e.currentTarget;
+                      desktopScroll.handleScrollEvent(el);
                       const atBottom = isAtBottom(el);
                       // During auto-scroll animation, don't update wasAtBottomRef
                       // to prevent it from flickering back to true mid-animation
@@ -3737,15 +3745,9 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                       }
                     }}
                   >
-                  {chatMessages.map((message, idx) => {
-                    // Pin-room: the LAST assistant message reserves 60vh so the
-                    // previous user message can stay pinned near the top. When
-                    // a new turn starts, this class moves off the old assistant
-                    // message (no longer last) and onto the new one.
-                    const isLast = idx === chatMessages.length - 1;
-                    const pinRoom = isLast && message.role === 'assistant' ? 'min-h-[60vh]' : '';
+                  {chatMessages.map((message) => {
                     return (
-                    <div key={message.id} data-message-id={message.id} className={`mb-5 scroll-mt-4 ${pinRoom}`}>
+                    <div key={message.id} data-message-id={message.id} className="mb-5 scroll-mt-4">
                       <div
                         className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
                       >
@@ -3829,10 +3831,9 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                     );
                   })}
 
-                  {/* Typing Indicator — also claims 60vh of pin-room while
-                      the assistant message doesn't exist yet. */}
+                  {/* Typing Indicator */}
                   {isTyping && (
-                    <div className="mb-3 min-h-[60vh]">
+                    <div className="mb-3">
                       <div className="flex justify-start">
                         <div className="max-w-[80%] rounded-2xl px-4 py-3 bg-white/10">
                           <div className="flex gap-1.5">
@@ -3871,7 +3872,7 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                       </div>
                     </div>
                     )}
-
+                  <div ref={desktopScroll.spacerRef} style={{ flexShrink: 0 }} />
                   </div>
 
                   {/* Scroll to bottom button */}
@@ -5199,12 +5200,11 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                               maskImage: 'linear-gradient(transparent 0px, transparent 40px, black 64px, black calc(100% - 16px), transparent 100%)',
                               WebkitMaskImage: 'linear-gradient(transparent 0px, transparent 40px, black 64px, black calc(100% - 16px), transparent 100%)',
                             }}
+                            onScroll={(e) => { mobileScroll.handleScrollEvent(e.currentTarget); }}
                           >
-                            {chatMessages.map((message, idx) => {
-                              const isLast = idx === chatMessages.length - 1;
-                              const pinRoom = isLast && message.role === 'assistant' ? 'min-h-[60vh]' : '';
+                            {chatMessages.map((message) => {
                               return (
-                              <div key={message.id} data-message-id={message.id} className={`mb-5 scroll-mt-4 ${pinRoom}`}>
+                              <div key={message.id} data-message-id={message.id} className="mb-5 scroll-mt-4">
                                 <div className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}>
                                   {message.role === 'assistant' && message.answerData ? (
                                     <AIAnswerCard
@@ -5286,7 +5286,7 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
 
                             {/* Typing Indicator */}
                             {isTyping && (
-                              <div className="mb-3 min-h-[60vh]">
+                              <div className="mb-3">
                                 <div className="flex justify-start">
                                   <div className="max-w-[80%] rounded-2xl px-4 py-3 bg-white/10">
                                     <div className="flex gap-1.5">
@@ -5310,7 +5310,7 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                                 </div>
                               </div>
                             )}
-
+                          <div ref={mobileScroll.spacerRef} style={{ flexShrink: 0 }} />
                           </div>
 
                           {/* Mobile Scroll to bottom button */}
