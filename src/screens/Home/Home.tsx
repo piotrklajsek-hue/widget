@@ -1961,6 +1961,7 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
   // are now provided by useOpinions hook
   
   const handleEndChatConfirmation = (confirm: boolean) => {
+    setIsAwaitingEndConfirmation(false);
     if (confirm) {
       // User wants to end conversation
       const userMessage: ChatMessage = {
@@ -1990,7 +1991,6 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
         streamMessageContent(farewellId, farewellFull);
         playReceivedSound();
         setIsChatEnded(true);
-        setIsAwaitingEndConfirmation(false);
       }, 1200);
     } else {
       // User wants to continue
@@ -2020,7 +2020,6 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
         setIsTyping(false);
         streamMessageContent(continueId, continueFull);
         playReceivedSound();
-        setIsAwaitingEndConfirmation(false);
       }, 1200);
     }
   };
