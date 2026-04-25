@@ -3915,7 +3915,7 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                       >
                         <ArrowDown className="w-4 h-4 text-black" />
                         {unreadScrollMessages > 0 && (
-                          <span className="absolute -top-2 -right-2 min-w-[20px] h-[20px] bg-[#0b5cff] text-black rounded-full flex items-center justify-center px-1" style={{ fontSize: '11px', lineHeight: '1', fontWeight: 600 }}>
+                          <span className="absolute -top-2 -right-2 min-w-[20px] h-[20px] bg-[#0b5cff] text-white rounded-full flex items-center justify-center px-1" style={{ fontSize: '11px', lineHeight: '1', fontWeight: 600 }}>
                             {unreadScrollMessages}
                           </span>
                         )}
@@ -5372,7 +5372,7 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                               >
                                 <ArrowDown className="w-4 h-4 text-black" />
                                 {unreadScrollMessages > 0 && (
-                                  <span className="absolute -top-2 -right-2 min-w-[20px] h-[20px] bg-[#0b5cff] text-black rounded-full flex items-center justify-center px-1" style={{ fontSize: '11px', lineHeight: '1', fontWeight: 600 }}>
+                                  <span className="absolute -top-2 -right-2 min-w-[20px] h-[20px] bg-[#0b5cff] text-white rounded-full flex items-center justify-center px-1" style={{ fontSize: '11px', lineHeight: '1', fontWeight: 600 }}>
                                     {unreadScrollMessages}
                                   </span>
                                 )}
