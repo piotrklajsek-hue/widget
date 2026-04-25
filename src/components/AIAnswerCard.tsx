@@ -68,7 +68,7 @@ export function AIAnswerCard({ data, timestamp, followUpQuestions, onCtaClick, o
 
         {/* ── 2. Recommendation ── always visible, right under headline */}
         {data.recommendation && (
-            <div className="pr-5 py-3">
+            <div className="mr-5 my-3" style={{ border: '1px solid #323334', borderRadius: '10px', padding: '8px 14px' }}>
               <div className="flex items-center gap-2.5">
                 <div className="w-9 h-9 rounded-full overflow-hidden flex-shrink-0 ring-1 ring-white/10">
                   <img
