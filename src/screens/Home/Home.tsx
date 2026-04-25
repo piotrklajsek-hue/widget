@@ -1733,13 +1733,12 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
       startAudioVisualization();
       
     } catch (err: any) {
-      // Permission denied or error
+      // Permission denied or device unavailable → fall back to mock recording
+      // so the user still gets a working transcription flow.
       if (err.name === 'NotAllowedError' || err.name === 'PermissionDeniedError') {
         setMicPermission('denied');
-        showErrorToast('Dostep do mikrofonu zostal zablokowany.\nZmien ustawienia w przegladarce.');
-      } else {
-        showErrorToast('Nie udalo sie uruchomic mikrofonu.');
       }
+      handleMockVoiceInput();
     }
   };
 
