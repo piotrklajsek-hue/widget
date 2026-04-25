@@ -2917,7 +2917,7 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                             }}
                             className="px-6 py-0.5 bg-[#0B9BFF] hover:brightness-90 hover:shadow-[0_0_20px_rgba(11,155,255,0.4)] active:scale-[0.97] text-white font-medium text-sm rounded-xl transition-all h-9"
                           >
-                            Zobacz 3 propozycje
+                            Pokaż korektę
                           </button>
                           <p className="text-white/50 text-xs">
                             Możesz wybrać i edytować przed wysłaniem
@@ -6011,7 +6011,7 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                                     }}
                                     className="px-6 py-0.5 bg-[#0B9BFF] hover:brightness-90 hover:shadow-[0_0_20px_rgba(11,155,255,0.4)] active:scale-[0.97] text-white font-medium text-sm rounded-xl transition-all h-9"
                                   >
-                                    Zobacz 3 propozycje
+                                    Pokaż korektę
                                   </button>
                                   <p className="text-white/50 text-xs">
                                     Możesz wybrać i edytować przed wysłaniem
