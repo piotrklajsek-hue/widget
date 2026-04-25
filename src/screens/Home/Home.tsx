@@ -3821,7 +3821,7 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                             )}
                             
                             {/* End Conversation Buttons */}
-                            {message.content === 'Czy chcesz zakończyć rozmowę?' && isAwaitingEndConfirmation && !isChatEnded && (
+                            {message.content === 'Czy chcesz zakończyć rozmowę?' && isAwaitingEndConfirmation && !isChatEnded && idx === chatMessages.length - 1 && (
                               <div className="flex justify-center gap-2 mt-3">
                                 <button
                                   onClick={() => handleEndChatConfirmation(true)}
@@ -5300,7 +5300,7 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                                       )}
                                       
                                       {/* End Conversation Buttons */}
-                                      {message.content === 'Czy chcesz zakończyć rozmowę?' && isAwaitingEndConfirmation && !isChatEnded && (
+                                      {message.content === 'Czy chcesz zakończyć rozmowę?' && isAwaitingEndConfirmation && !isChatEnded && idx === chatMessages.length - 1 && (
                                         <div className="flex justify-center gap-2 mt-3">
                                           <button
                                             onClick={() => handleEndChatConfirmation(true)}
