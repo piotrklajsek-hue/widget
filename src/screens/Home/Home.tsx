@@ -2660,7 +2660,7 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                         <ArrowLeft className="w-4 h-4 text-white" />
                       </button>
                     )}
-                    <h3 className="text-white text-sm font-medium">Dodaj opinię w <span className="text-[#0b5cff] font-bold">10 sekund</span></h3>
+                    <h3 className="text-white text-sm font-medium">Dodaj opinię w <span className="text-white font-bold">10 sekund</span></h3>
                   </div>
                   <div className="flex items-center gap-1.5 relative" ref={addOpinionMenuRef}>
                     <button 
@@ -5011,7 +5011,7 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                       </div>
                     ) : mobileView === 'addOpinion' ? (
                       <div className="flex items-center gap-2 h-[36px]">
-                        <span className="text-white text-sm">Dodaj opinię w <span className="text-[#0b5cff] font-bold">10 sekund</span></span>
+                        <span className="text-white text-sm">Dodaj opinię w <span className="text-white font-bold">10 sekund</span></span>
                       </div>
                     ) : (
                       <div className="flex items-center gap-2 h-[36px]">
