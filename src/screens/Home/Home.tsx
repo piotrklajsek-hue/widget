@@ -4300,7 +4300,7 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                   ref={avatarsAnchorRef}
                   className={`group flex items-center gap-1.5 flex-shrink-0 rounded-full cursor-pointer transition-colors ${
                     hasOpinion
-                      ? 'bg-green-500 hover:bg-green-600'
+                      ? 'bg-green-500 hover:bg-green-500/80'
                       : isRecommended
                       ? 'bg-[#0b5cff]/20 hover:bg-[#0b5cff]/40'
                       : 'hover:bg-[#F2F2F2]'
@@ -4874,7 +4874,7 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                       <div 
                         className={`flex items-center gap-2 rounded-full transition-all cursor-pointer ${
                           hasOpinion
-                            ? (isHovering ? 'bg-green-600' : 'bg-green-500')
+                            ? (isHovering ? 'bg-green-500/80' : 'bg-green-500')
                             : isRecommended
                             ? (isHovering ? 'bg-[#0b5cff]/40' : 'bg-[#0b5cff]/20')
                             : ''
