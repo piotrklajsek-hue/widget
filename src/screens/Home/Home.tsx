@@ -4298,14 +4298,19 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
               {showSocialProof && (
                 <div
                   ref={avatarsAnchorRef}
-                  className={`group flex items-center gap-1.5 flex-shrink-0 rounded-full cursor-pointer transition-colors ${
+                  className={`group flex items-center gap-1.5 flex-shrink-0 cursor-pointer transition-colors ${
                     hasOpinion
-                      ? 'bg-[#027700] hover:bg-[#027700]/80 border border-white/20'
+                      ? 'rounded-[10px] bg-[#027700] hover:bg-[#027700]/80 border border-[#323334]'
                       : isRecommended
-                      ? 'bg-[#0b5cff]/20 hover:bg-[#0b5cff]/40'
-                      : 'hover:bg-[#F2F2F2]'
+                      ? 'rounded-full bg-[#0b5cff]/20 hover:bg-[#0b5cff]/40'
+                      : 'rounded-full hover:bg-[#F2F2F2]'
                   }`}
-                  style={{
+                  style={hasOpinion ? {
+                    paddingTop: '8px',
+                    paddingBottom: '8px',
+                    paddingLeft: '14px',
+                    paddingRight: '14px'
+                  } : {
                     paddingTop: '6px',
                     paddingBottom: '6px',
                     paddingLeft: '8px',
@@ -4872,19 +4877,24 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                       onMouseLeave={() => setIsHovering(false)}
                     >
                       <div 
-                        className={`flex items-center gap-2 rounded-full transition-all cursor-pointer ${
+                        className={`flex items-center gap-2 transition-all cursor-pointer ${
                           hasOpinion
-                            ? `border border-white/20 ${isHovering ? 'bg-[#027700]/80' : 'bg-[#027700]'}`
+                            ? `rounded-[10px] border border-[#323334] ${isHovering ? 'bg-[#027700]/80' : 'bg-[#027700]'}`
                             : isRecommended
-                            ? (isHovering ? 'bg-[#0b5cff]/40' : 'bg-[#0b5cff]/20')
-                            : ''
+                            ? `rounded-full ${isHovering ? 'bg-[#0b5cff]/40' : 'bg-[#0b5cff]/20'}`
+                            : 'rounded-full'
                         }`}
-                        style={{
+                        style={hasOpinion ? {
+                          paddingTop: '8px',
+                          paddingBottom: '8px',
+                          paddingLeft: '14px',
+                          paddingRight: '14px'
+                        } : {
                           paddingTop: '6px',
                           paddingBottom: '6px',
                           paddingLeft: '8px',
                           paddingRight: '6px',
-                          ...(!hasOpinion && !isRecommended && isHovering ? { backgroundColor: '#F2F2F2' } : {})
+                          ...(!isRecommended && isHovering ? { backgroundColor: '#F2F2F2' } : {})
                         }}
                         onClick={() => {
                           analytics.trackAvatarClicked();
