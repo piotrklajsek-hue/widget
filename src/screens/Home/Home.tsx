@@ -4225,7 +4225,7 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                   <div className="relative" style={{ height: '22px' }}>
                     <AnimatePresence mode="wait">
                       <motion.span
-                        key={currentPlaceholder}
+                        key={chatMessages.length > 0 && hasClosedChat ? 'continue' : currentPlaceholder}
                         initial={{ x: 16, opacity: 0 }}
                         animate={{ x: 0, opacity: 1 }}
                         exit={{ x: -16, opacity: 0 }}
@@ -4233,7 +4233,7 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                         className="text-gray-700 block truncate absolute inset-0"
                         style={{ fontSize: '14px', lineHeight: '150%' }}
                       >
-                        {placeholders[currentPlaceholder]}
+                        {chatMessages.length > 0 && hasClosedChat ? 'Kontynuuj rozmowę' : placeholders[currentPlaceholder]}
                       </motion.span>
                     </AnimatePresence>
                   </div>
@@ -4343,7 +4343,7 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
               ) : (
                 <AnimatePresence mode="wait">
                   <motion.span
-                    key={currentPlaceholder}
+                    key={chatMessages.length > 0 && hasClosedChat ? 'continue' : currentPlaceholder}
                     initial={{ y: -20, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
                     exit={{ y: 20, opacity: 0 }}
@@ -4351,7 +4351,7 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                     className="text-gray-400 flex-1"
                     style={{ fontSize: '14px' }}
                   >
-                    {placeholders[currentPlaceholder]}
+                    {chatMessages.length > 0 && hasClosedChat ? 'Kontynuuj rozmowę' : placeholders[currentPlaceholder]}
                   </motion.span>
                 </AnimatePresence>
               )}
@@ -4550,7 +4550,7 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                 {inputValue.length === 0 && (
                   <AnimatePresence mode="wait" initial={false}>
                     <motion.div
-                      key={currentPlaceholder}
+                      key={chatMessages.length > 0 && hasClosedChat ? 'continue' : currentPlaceholder}
                       initial={isFirstExpandRender ? false : { y: -14, opacity: 0 }}
                       animate={{ y: 0, opacity: 1 }}
                       exit={{ y: 14, opacity: 0 }}
@@ -4558,7 +4558,7 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                       className="absolute left-2 text-gray-700 pointer-events-none flex items-center"
                       style={{ fontSize: '14px', lineHeight: '22px', height: '100%' }}
                     >
-                      {placeholders[currentPlaceholder]}
+                      {chatMessages.length > 0 && hasClosedChat ? 'Kontynuuj rozmowę' : placeholders[currentPlaceholder]}
                     </motion.div>
                   </AnimatePresence>
                 )}
