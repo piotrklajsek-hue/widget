@@ -73,7 +73,7 @@ const renderToast = (
 );
 
 const showSuccessToast = (message: string) => {
-  toast.custom((id) => renderToast(id, message, '#FADA00', Check, 'black'), { duration: 2000 });
+  toast.custom((id) => renderToast(id, message, '#0b5cff', Check, 'black'), { duration: 2000 });
 };
 
 const showErrorToast = (message: string) => {
@@ -2328,24 +2328,24 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                   <div className="space-y-3 text-white/70">
                     <div className="space-y-2">
                       <h3 className="text-white text-sm font-medium flex items-center gap-2">
-                        <Search className="w-4 h-4 text-[#FADA00]" />
+                        <Search className="w-4 h-4 text-[#0b5cff]" />
                         Co potrafi widget
                       </h3>
                       <ul className="space-y-2 pl-6 text-sm">
                         <li className="flex items-start gap-2">
-                          <span className="text-[#FADA00] mt-0.5">•</span>
+                          <span className="text-[#0b5cff] mt-0.5">•</span>
                           <span>pomaga szybko znaleźć informacje na stronie</span>
                         </li>
                         <li className="flex items-start gap-2">
-                          <span className="text-[#FADA00] mt-0.5">•</span>
+                          <span className="text-[#0b5cff] mt-0.5">•</span>
                           <span>informuje właściciela czego użytkownicy nie mogą znaleźć</span>
                         </li>
                         <li className="flex items-start gap-2">
-                          <span className="text-[#FADA00] mt-0.5">•</span>
+                          <span className="text-[#0b5cff] mt-0.5">•</span>
                           <span>odpowiada na pytania użytkowników</span>
                         </li>
                         <li className="flex items-start gap-2">
-                          <span className="text-[#FADA00] mt-0.5">•</span>
+                          <span className="text-[#0b5cff] mt-0.5">•</span>
                           <span>wyświetla opinie osób, które możesz znać</span>
                         </li>
                       </ul>
@@ -2400,7 +2400,7 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                                   )}
                                 </div>
                                 {fieldErrors.url ? (
-                                  <p className="text-amber-400/80 text-xs mt-1 ml-1">{fieldErrors.url}</p>
+                                  <p className="text-[#0b5cff]/80 text-xs mt-1 ml-1">{fieldErrors.url}</p>
                                 ) : (
                                   <p className="text-white/40 text-xs mt-1 ml-1">Domena strony — wklej pełny URL, wyciągniemy domenę</p>
                                 )}
@@ -2433,7 +2433,7 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                                   )}
                                 </div>
                                 {fieldErrors.email ? (
-                                  <p className="text-amber-400/80 text-xs mt-1 ml-1">{fieldErrors.email}</p>
+                                  <p className="text-[#0b5cff]/80 text-xs mt-1 ml-1">{fieldErrors.email}</p>
                                 ) : null}
                               </div>
                               {validationError && (
@@ -2569,7 +2569,7 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
       <div
         className="fixed bottom-0 left-0 right-0 p-6 md:p-8 z-40"
         style={theme ? {
-          '--locly-primary': theme.primary || '#FADA00',
+          '--locly-primary': theme.primary || '#0b5cff',
           '--locly-primary-fg': theme.primaryForeground || '#000',
           '--locly-widget-bg': theme.widgetBg || 'rgba(0,0,0,0.5)',
           '--locly-widget-border': theme.widgetBorder || 'rgba(255,255,255,0.2)',
@@ -2648,7 +2648,7 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                         <ArrowLeft className="w-4 h-4 text-white" />
                       </button>
                     )}
-                    <h3 className="text-white text-sm font-medium">Dodaj opinię w <span className="text-[#FADA00] font-bold">10 sekund</span></h3>
+                    <h3 className="text-white text-sm font-medium">Dodaj opinię w <span className="text-[#0b5cff] font-bold">10 sekund</span></h3>
                   </div>
                   <div className="flex items-center gap-1.5 relative" ref={addOpinionMenuRef}>
                     <button 
@@ -2888,7 +2888,7 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                       {isGeneratingAI ? (
                         <div className="flex flex-col items-center justify-center py-4 gap-2">
                           <div className="flex items-center gap-2">
-                            <Loader2 className="w-5 h-5 text-yellow-400 animate-spin" />
+                            <Loader2 className="w-5 h-5 text-[#0b5cff] animate-spin" />
                             <p className="text-white text-sm font-medium">Tworzymy Twoją opinię…</p>
                           </div>
                           <p className="text-white/50 text-xs">Zaraz zobaczysz gotowe wersje do wyboru</p>
@@ -2973,7 +2973,7 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                               <p className="text-white/90 text-sm flex-1">{suggestion}</p>
                             )}
                             {selectedSuggestion === index && (
-                              <Check className="w-5 h-5 text-yellow-400 flex-shrink-0 mt-1" />
+                              <Check className="w-5 h-5 text-[#0b5cff] flex-shrink-0 mt-1" />
                             )}
                           </div>
                         </div>
@@ -3686,7 +3686,7 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                               <span className="text-white/80 text-sm">Dźwięki</span>
                             </div>
                             {/* Toggle switch */}
-                            <div className={`relative w-10 h-6 rounded-full transition-colors duration-200 ${soundsEnabled ? 'bg-yellow-400' : 'bg-white/20'}`}>
+                            <div className={`relative w-10 h-6 rounded-full transition-colors duration-200 ${soundsEnabled ? 'bg-[#0b5cff]' : 'bg-white/20'}`}>
                               <div className={`absolute top-0.5 w-5 h-5 bg-white rounded-full shadow-sm transition-transform duration-200 ${soundsEnabled ? 'translate-x-[18px]' : 'translate-x-0.5'}`} />
                             </div>
                           </button>
@@ -3905,7 +3905,7 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                       >
                         <ArrowDown className="w-4 h-4 text-black" />
                         {unreadScrollMessages > 0 && (
-                          <span className="absolute -top-2 -right-2 min-w-[20px] h-[20px] bg-yellow-400 text-black rounded-full flex items-center justify-center px-1" style={{ fontSize: '11px', lineHeight: '1', fontWeight: 600 }}>
+                          <span className="absolute -top-2 -right-2 min-w-[20px] h-[20px] bg-[#0b5cff] text-black rounded-full flex items-center justify-center px-1" style={{ fontSize: '11px', lineHeight: '1', fontWeight: 600 }}>
                             {unreadScrollMessages}
                           </span>
                         )}
@@ -3924,7 +3924,7 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                           setIsChatEnded(false);
                           setIsAwaitingEndConfirmation(false);
                         }}
-                        className="text-yellow-400 text-sm hover:text-yellow-300 transition-all"
+                        className="text-[#0b5cff] text-sm hover:text-[#3a82ff] transition-all"
                       >
                         Rozpocznij nową rozmowę
                       </button>
@@ -3995,7 +3995,7 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                           disabled={mobileInputValue.trim().length === 0}
                           className={`rounded-full p-2 transition-all ${
                             mobileInputValue.trim().length > 0
-                              ? 'bg-yellow-400 text-black hover:brightness-90 hover:shadow-[0_0_16px_rgba(250,204,21,0.4)]'
+                              ? 'bg-[#0b5cff] text-black hover:brightness-90 hover:shadow-[0_0_16px_rgba(11,92,255,0.4)]'
                               : 'bg-white/10 text-white/30'
                           }`}
                         >
@@ -4278,7 +4278,7 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                     hasOpinion
                       ? 'bg-green-500/20 hover:bg-green-500/30'
                       : isRecommended
-                      ? 'bg-yellow-400/20 hover:bg-yellow-500/40'
+                      ? 'bg-[#0b5cff]/20 hover:bg-[#0b5cff]/40'
                       : 'hover:bg-[#F2F2F2]'
                   }`}
                   style={{
@@ -4355,7 +4355,7 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                 </AnimatePresence>
               )}
               {images.length > 0 && (
-                <span className="bg-yellow-400 text-black text-[10px] rounded-full w-5 h-5 flex items-center justify-center flex-shrink-0" style={{ fontWeight: 600 }}>
+                <span className="bg-[#0b5cff] text-black text-[10px] rounded-full w-5 h-5 flex items-center justify-center flex-shrink-0" style={{ fontWeight: 600 }}>
                   {images.length}
                 </span>
               )}
@@ -4841,7 +4841,7 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                           hasOpinion
                             ? (isHovering ? 'bg-green-500/30' : 'bg-green-500/20')
                             : isRecommended 
-                            ? (isHovering ? 'bg-yellow-500/40' : 'bg-yellow-400/20')
+                            ? (isHovering ? 'bg-[#0b5cff]/40' : 'bg-[#0b5cff]/20')
                             : ''
                         }`}
                         style={{
@@ -4994,7 +4994,7 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                       </div>
                     ) : mobileView === 'addOpinion' ? (
                       <div className="flex items-center gap-2 h-[36px]">
-                        <span className="text-white text-sm">Dodaj opinię w <span className="text-[#FADA00] font-bold">10 sekund</span></span>
+                        <span className="text-white text-sm">Dodaj opinię w <span className="text-[#0b5cff] font-bold">10 sekund</span></span>
                       </div>
                     ) : (
                       <div className="flex items-center gap-2 h-[36px]">
@@ -5103,7 +5103,7 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                             {soundsEnabled ? <Volume2 className="w-5 h-5 text-white/50" /> : <VolumeX className="w-5 h-5 text-white/50" />}
                             <span className="text-white/80 text-sm">D��więki</span>
                           </div>
-                          <div className={`relative w-10 h-6 rounded-full transition-colors duration-200 ${soundsEnabled ? 'bg-yellow-400' : 'bg-white/20'}`}>
+                          <div className={`relative w-10 h-6 rounded-full transition-colors duration-200 ${soundsEnabled ? 'bg-[#0b5cff]' : 'bg-white/20'}`}>
                             <div className={`absolute top-0.5 w-5 h-5 bg-white rounded-full shadow-sm transition-transform duration-200 ${soundsEnabled ? 'translate-x-[18px]' : 'translate-x-0.5'}`} />
                           </div>
                         </button>
@@ -5166,7 +5166,7 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                 <div className="flex-1 flex flex-col min-h-0 overflow-hidden relative">
                   {mobileSearchLoading ? (
                     <div className="flex-1 flex items-center justify-center">
-                      <Loader2 className="w-8 h-8 text-yellow-400 animate-spin" />
+                      <Loader2 className="w-8 h-8 text-[#0b5cff] animate-spin" />
                     </div>
                   ) : (
                   <AnimatePresence initial={false} mode="popLayout">
@@ -5343,7 +5343,7 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                               >
                                 <ArrowDown className="w-4 h-4 text-black" />
                                 {unreadScrollMessages > 0 && (
-                                  <span className="absolute -top-2 -right-2 min-w-[20px] h-[20px] bg-yellow-400 text-black rounded-full flex items-center justify-center px-1" style={{ fontSize: '11px', lineHeight: '1', fontWeight: 600 }}>
+                                  <span className="absolute -top-2 -right-2 min-w-[20px] h-[20px] bg-[#0b5cff] text-black rounded-full flex items-center justify-center px-1" style={{ fontSize: '11px', lineHeight: '1', fontWeight: 600 }}>
                                     {unreadScrollMessages}
                                   </span>
                                 )}
@@ -5406,8 +5406,8 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                                     : isRecommended
                                     ? 'bg-white/5 text-white/40 hover:bg-white/10 active:scale-[0.97]'
                                     : isRecommending
-                                    ? 'bg-yellow-400/70 text-black cursor-default'
-                                    : 'bg-yellow-400 text-black active:scale-[0.97]'
+                                    ? 'bg-[#0b5cff]/70 text-black cursor-default'
+                                    : 'bg-[#0b5cff] text-black active:scale-[0.97]'
                                 }`}
                               >
                                 {isRecommending ? (
@@ -5617,8 +5617,8 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                                     : isRecommended
                                     ? 'bg-white/5 text-white/40 cursor-pointer'
                                     : isRecommending
-                                    ? 'bg-yellow-400/70 text-black cursor-default'
-                                    : 'bg-yellow-400 text-black'
+                                    ? 'bg-[#0b5cff]/70 text-black cursor-default'
+                                    : 'bg-[#0b5cff] text-black'
                                 }`}
                               >
                                 {isRecommending ? (
@@ -5969,7 +5969,7 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                               {isGeneratingAI ? (
                                 <div className="flex flex-col items-center justify-center py-4 gap-2">
                                   <div className="flex items-center gap-2">
-                                    <Loader2 className="w-5 h-5 text-yellow-400 animate-spin" />
+                                    <Loader2 className="w-5 h-5 text-[#0b5cff] animate-spin" />
                                     <p className="text-white text-sm font-medium">Tworzymy Twoją opinię…</p>
                                   </div>
                                   <p className="text-white/50 text-xs">Zaraz zobaczysz gotowe wersje do wyboru</p>
@@ -6018,7 +6018,7 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                                   }`}
                                 >
                                   <div className="flex items-start gap-3">
-                                    <div className={`flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center text-xs font-medium ${selectedSuggestion === index ? 'mt-1 bg-yellow-400 text-black' : 'bg-white/10 text-white/50'}`}>
+                                    <div className={`flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center text-xs font-medium ${selectedSuggestion === index ? 'mt-1 bg-[#0b5cff] text-black' : 'bg-white/10 text-white/50'}`}>
                                       {index + 1}
                                     </div>
                                     {selectedSuggestion === index ? (
@@ -6038,7 +6038,7 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                                       <p className="text-white/90 text-sm flex-1">{suggestion}</p>
                                     )}
                                     {selectedSuggestion === index && (
-                                      <Check className="w-5 h-5 text-yellow-400 flex-shrink-0 mt-1" />
+                                      <Check className="w-5 h-5 text-[#0b5cff] flex-shrink-0 mt-1" />
                                     )}
                                   </div>
                                 </div>
@@ -6161,7 +6161,7 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                                   });
                                 }}
                                 disabled={isSubmittingOpinion}
-                                className="px-8 py-0.5 bg-yellow-400 hover:brightness-90 hover:shadow-[0_0_20px_rgba(250,204,21,0.4)] active:scale-[0.97] disabled:bg-yellow-400/50 disabled:cursor-not-allowed disabled:shadow-none text-black font-medium text-sm rounded-xl transition-all flex items-center justify-center gap-2 h-9 min-w-[120px]"
+                                className="px-8 py-0.5 bg-[#0b5cff] hover:brightness-90 hover:shadow-[0_0_20px_rgba(11,92,255,0.4)] active:scale-[0.97] disabled:bg-[#0b5cff]/50 disabled:cursor-not-allowed disabled:shadow-none text-black font-medium text-sm rounded-xl transition-all flex items-center justify-center gap-2 h-9 min-w-[120px]"
                               >
                                 {isSubmittingOpinion ? (
                                   <Loader2 className="w-5 h-5 animate-spin" />
@@ -6230,7 +6230,7 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                           setIsAwaitingEndConfirmation(false);
                           setMobileView('search');
                         }}
-                        className="text-yellow-400 text-sm hover:text-yellow-300 transition-all"
+                        className="text-[#0b5cff] text-sm hover:text-[#3a82ff] transition-all"
                       >
                         Rozpocznij nową rozmowę
                       </button>

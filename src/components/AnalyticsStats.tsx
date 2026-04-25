@@ -90,9 +90,9 @@ export function AnalyticsStats({ ownerId, ownerDomain }: AnalyticsStatsProps) {
 
   if (!analytics) {
     return (
-      <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-6 text-center">
-        <p className="text-yellow-800 font-medium">Brak danych analitycznych</p>
-        <p className="text-sm text-yellow-600 mt-1">Upewnij się, że widget jest poprawnie skonfigurowany</p>
+      <div className="bg-blue-50 border border-blue-200 rounded-lg p-6 text-center">
+        <p className="text-blue-800 font-medium">Brak danych analitycznych</p>
+        <p className="text-sm text-blue-600 mt-1">Upewnij się, że widget jest poprawnie skonfigurowany</p>
       </div>
     );
   }

@@ -10,9 +10,9 @@
  */
 
 export interface LoclyWidgetTheme {
-  /** Primary accent color (default: '#FADA00' — yellow) */
+  /** Primary accent color (default: '#0b5cff' — blue) */
   primary?: string;
-  /** Primary text color on primary bg (default: '#000') */
+  /** Primary text color on primary bg (default: '#fff') */
   primaryForeground?: string;
   /** Widget background (glass effect base, default: 'rgba(0,0,0,0.5)') */
   widgetBg?: string;

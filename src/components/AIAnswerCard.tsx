@@ -91,9 +91,9 @@ export function AIAnswerCard({ data, timestamp, followUpQuestions, onCtaClick, o
                     „{data.recommendation.opinion}"
                   </p>
                 </div>
-                <div className="flex items-center gap-1 bg-[#FADA00]/10 px-2 py-0.5 rounded-full shrink-0 self-start mt-0.5">
-                  <Star className="w-2.5 h-2.5 text-[#FADA00] fill-[#FADA00]" />
-                  <span className="text-[#FADA00] text-[10px]">Rekomendacja</span>
+                <div className="flex items-center gap-1 bg-[#0b5cff]/10 px-2 py-0.5 rounded-full shrink-0 self-start mt-0.5">
+                  <Star className="w-2.5 h-2.5 text-[#0b5cff] fill-[#0b5cff]" />
+                  <span className="text-[#0b5cff] text-[10px]">Rekomendacja</span>
                 </div>
               </div>
             </div>

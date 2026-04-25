@@ -87,7 +87,7 @@ export function AuthCallback() {
       <div className="text-center space-y-4 px-6">
         {status === 'loading' && (
           <>
-            <Loader2 className="w-10 h-10 text-yellow-400 animate-spin mx-auto" />
+            <Loader2 className="w-10 h-10 text-[#0b5cff] animate-spin mx-auto" />
             <p className="text-white/70 text-sm">Logowanie przez {provider}...</p>
           </>
         )}
@@ -105,7 +105,7 @@ export function AuthCallback() {
             <p className="text-white/70 text-sm max-w-xs mx-auto">{errorMessage}</p>
             <button
               onClick={() => navigate('/', { replace: true })}
-              className="mt-4 px-6 py-2 bg-yellow-400 hover:bg-yellow-600 text-black rounded-lg transition-all text-sm"
+              className="mt-4 px-6 py-2 bg-[#0b5cff] hover:bg-[#094ac9] text-white rounded-lg transition-all text-sm"
             >
               Wróc na strone
             </button>
