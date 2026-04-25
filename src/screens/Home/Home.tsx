@@ -3756,9 +3756,12 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                     }}
                   >
                   {(() => {
-                    const lastAnsweredId = [...chatMessages].reverse().find((m) => m.role === 'assistant' && m.answerData)?.id;
-                    return chatMessages.map((message) => {
-                    const isLastAnswered = message.id === lastAnsweredId;
+                    let lastUserIdx = -1;
+                    for (let i = chatMessages.length - 1; i >= 0; i--) {
+                      if (chatMessages[i].role === 'user') { lastUserIdx = i; break; }
+                    }
+                    return chatMessages.map((message, idx) => {
+                    const followUpsActive = idx > lastUserIdx;
                     return (
                     <div key={message.id} data-message-id={message.id} className="mb-5 scroll-mt-4">
                       <div
@@ -3770,7 +3773,7 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                             data={message.answerData}
                             timestamp={message.timestamp}
                             sources={message.sources}
-                            followUpQuestions={isLastAnswered ? message.followUpQuestions : undefined}
+                            followUpQuestions={followUpsActive ? message.followUpQuestions : undefined}
                             onCtaClick={(action) => {
                               if (action === 'quote') {
                                 handleSubmit('Chciałbym zapytać o wycenę');
@@ -5236,9 +5239,12 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                             onScroll={(e) => { mobileScroll.handleScrollEvent(e.currentTarget); }}
                           >
                             {(() => {
-                              const lastAnsweredId = [...chatMessages].reverse().find((m) => m.role === 'assistant' && m.answerData)?.id;
-                              return chatMessages.map((message) => {
-                              const isLastAnswered = message.id === lastAnsweredId;
+                              let lastUserIdx = -1;
+                              for (let i = chatMessages.length - 1; i >= 0; i--) {
+                                if (chatMessages[i].role === 'user') { lastUserIdx = i; break; }
+                              }
+                              return chatMessages.map((message, idx) => {
+                              const followUpsActive = idx > lastUserIdx;
                               return (
                               <div key={message.id} data-message-id={message.id} className="mb-5 scroll-mt-4">
                                 <div className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}>
@@ -5247,7 +5253,7 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                                       data={message.answerData}
                                       timestamp={message.timestamp}
                                       sources={message.sources}
-                                      followUpQuestions={isLastAnswered ? message.followUpQuestions : undefined}
+                                      followUpQuestions={followUpsActive ? message.followUpQuestions : undefined}
                                       onCtaClick={(action) => {
                                         if (action === 'quote') {
                                           handleSubmit('Chciałbym zapytać o wycenę');
