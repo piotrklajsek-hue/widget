@@ -3480,8 +3480,8 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                         <div className="space-y-2">
                           {additionalRecommenders.map((person) => (
                             <div key={person.id} className="flex items-center gap-2">
-                              <img 
-                                src={person.avatar} 
+                              <img
+                                src={person.avatar}
                                 alt={person.name}
                                 className="w-6 h-6 rounded-full object-cover"
                               />
@@ -3493,6 +3493,7 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                             </div>
                           ))}
                         </div>
+                        <p className="text-white/40 text-xs pl-8 pt-2">i 10 więcej</p>
                       </div>
                     )}
                     
@@ -5762,6 +5763,7 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                                     </div>
                                   ))}
                                 </div>
+                                <p className="text-white/40 text-xs pl-8 pt-2">i 10 więcej</p>
                               </div>
                             )}
                             
