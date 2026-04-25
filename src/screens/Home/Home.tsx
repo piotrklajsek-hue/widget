@@ -2886,8 +2886,8 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                           value={opinionText}
                           onChange={(e) => setOpinionText(e.target.value)}
                           placeholder="Np. Świetna obsługa, szybka pomoc i wszystko dobrze wytłumaczone"
-                          className="no-glow w-full bg-white/5 hover:bg-white/10 focus:bg-white/10 active:bg-white/10 backdrop-blur-sm text-white placeholder-white/50 text-sm px-4 py-3 rounded-xl transition-all resize-none border-0"
-                          style={{ outline: 'none', boxShadow: 'none', border: 'none' }}
+                          className="no-glow w-full bg-white/5 hover:bg-white/10 focus:bg-white/10 active:bg-white/10 backdrop-blur-sm text-white placeholder-white/50 text-sm transition-all resize-none focus:outline-none"
+                          style={{ borderRadius: '10px', border: '1px solid #323334', padding: '8px 14px', boxShadow: 'none' }}
                           rows={4}
                           autoFocus
                         />
@@ -2971,8 +2971,8 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                                   onChange={(e) => setOpinionText(e.target.value)}
                                   onClick={(e) => e.stopPropagation()}
                                   rows={4}
-                                  className="no-glow w-full bg-white/5 hover:bg-white/10 focus:bg-white/10 active:bg-white/10 backdrop-blur-sm text-white/90 text-sm rounded-lg p-3 resize-none transition-all border-0 focus:ring-0 focus:outline-none"
-                                  style={{ outline: 'none', boxShadow: 'none' }}
+                                  className="no-glow w-full bg-white/5 hover:bg-white/10 focus:bg-white/10 active:bg-white/10 backdrop-blur-sm text-white/90 text-sm resize-none transition-all focus:ring-0 focus:outline-none"
+                                  style={{ borderRadius: '10px', border: '1px solid #323334', padding: '8px 14px', boxShadow: 'none' }}
                                   placeholder="Edytuj swoją opinię..."
                                 />
                                 <p className="text-white/40 text-xs text-right">{opinionText.length} znaków</p>
@@ -6003,8 +6003,8 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                                   value={opinionText}
                                   onChange={(e) => setOpinionText(e.target.value)}
                                   placeholder="Np. Świetna obsługa, szybka pomoc i wszystko dobrze wytłumaczone"
-                                  className="w-full bg-white/10 backdrop-blur-sm text-white placeholder-white/50 text-sm px-4 py-3 rounded-xl transition-all resize-none border-0"
-                                  style={{ outline: 'none', boxShadow: 'none' }}
+                                  className="w-full bg-white/10 backdrop-blur-sm text-white placeholder-white/50 text-sm transition-all resize-none focus:outline-none"
+                                  style={{ borderRadius: '10px', border: '1px solid #323334', padding: '8px 14px', boxShadow: 'none' }}
                                   rows={4}
                                   autoFocus
                                 />
@@ -6071,8 +6071,8 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                                           onChange={(e) => setOpinionText(e.target.value)}
                                           onClick={(e) => e.stopPropagation()}
                                           rows={4}
-                                          className="no-glow w-full bg-white/5 hover:bg-white/10 active:bg-white/10 focus:bg-white/10 backdrop-blur-sm text-white/90 text-sm rounded-lg p-3 resize-none transition-all border-0 focus:ring-0 focus:outline-none"
-                                          style={{ outline: 'none', boxShadow: 'none' }}
+                                          className="no-glow w-full bg-white/5 hover:bg-white/10 active:bg-white/10 focus:bg-white/10 backdrop-blur-sm text-white/90 text-sm resize-none transition-all focus:ring-0 focus:outline-none"
+                                          style={{ borderRadius: '10px', border: '1px solid #323334', padding: '8px 14px', boxShadow: 'none' }}
                                           placeholder="Edytuj swoją opinię..."
                                         />
                                         <p className="text-white/40 text-xs text-right">{opinionText.length} znaków</p>
