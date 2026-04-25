@@ -2644,8 +2644,6 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                           setShowAISuggestions(false);
                           setAiSuggestions([]);
                           setSelectedSuggestion(null);
-                          setInputMethod(null);
-                          setOpinionText('');
                         }}
                         className="w-8 h-8 flex items-center justify-center hover:bg-white/10 rounded-full transition-colors"
                         title="Wróć"
@@ -4976,8 +4974,6 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                             setShowAISuggestions(false);
                             setAiSuggestions([]);
                             setSelectedSuggestion(null);
-                            setInputMethod(null);
-                            setOpinionText('');
                           } else if (inputMethod !== null) {
                             setInputMethod(null);
                             setOpinionText('');
