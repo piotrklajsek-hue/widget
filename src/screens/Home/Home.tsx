@@ -772,6 +772,15 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
     prevMobileViewRef.current = mobileView;
   }, [mobileView, showMobileSearch]);
 
+  // Desktop chat overlay: scroll to bottom whenever it opens
+  useEffect(() => {
+    if (!showChatOverlay) return;
+    requestAnimationFrame(() => {
+      const el = chatMessagesRef.current;
+      if (el) el.scrollTop = el.scrollHeight;
+    });
+  }, [showChatOverlay]);
+
   // Close menus when clicking outside
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
