@@ -454,14 +454,14 @@
      Scoped text selection — delikatne zaznaczenie
      ─────────────────────────────────────────────────────────── */
   .locly-widget ::selection {
-    background-color: rgba(250, 204, 21, 0.2);
+    background-color: rgba(11, 92, 255, 0.3);
     color: inherit;
     border-radius: 9999px;
     padding: 8px;
   }
 
   .locly-widget ::-moz-selection {
-    background-color: rgba(250, 204, 21, 0.2);
+    background-color: rgba(11, 92, 255, 0.3);
     color: inherit;
     border-radius: 9999px;
     padding: 8px;
