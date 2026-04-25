@@ -3756,7 +3756,7 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                     }}
                   >
                   {(() => {
-                    const lastAssistantId = [...chatMessages].reverse().find((m) => m.role === 'assistant')?.id;
+                    const lastAssistantId = [...chatMessages].reverse().find((m) => m.role === 'assistant' && m.answerData)?.id;
                     return chatMessages.map((message) => {
                     const isLastAssistant = message.id === lastAssistantId;
                     return (
@@ -5236,7 +5236,7 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                             onScroll={(e) => { mobileScroll.handleScrollEvent(e.currentTarget); }}
                           >
                             {(() => {
-                              const lastAssistantId = [...chatMessages].reverse().find((m) => m.role === 'assistant')?.id;
+                              const lastAssistantId = [...chatMessages].reverse().find((m) => m.role === 'assistant' && m.answerData)?.id;
                               return chatMessages.map((message) => {
                               const isLastAssistant = message.id === lastAssistantId;
                               return (
