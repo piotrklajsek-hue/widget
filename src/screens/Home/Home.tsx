@@ -4307,7 +4307,7 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                       ? 'bg-[#027700] hover:bg-[#027700]/80 border border-white/20'
                       : isRecommended
                       ? 'bg-[#0b5cff]/20 hover:bg-[#0b5cff]/40'
-                      : 'bg-[#F2F2F2] hover:bg-[#E5E5E5]'
+                      : 'bg-[#D9D9D9] hover:bg-white'
                   }`}
                   style={{
                     paddingTop: '6px',
@@ -4866,7 +4866,7 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                           paddingBottom: '6px',
                           paddingLeft: '8px',
                           paddingRight: '6px',
-                          ...(!hasOpinion && !isRecommended ? { backgroundColor: isHovering ? '#E5E5E5' : '#F2F2F2' } : {})
+                          ...(!hasOpinion && !isRecommended ? { backgroundColor: isHovering ? '#ffffff' : '#D9D9D9' } : {})
                         }}
                         onClick={() => {
                           analytics.trackAvatarClicked();
