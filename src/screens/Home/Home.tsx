@@ -4212,6 +4212,15 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                 className="flex-1 min-w-0 overflow-hidden cursor-text"
                 onClick={() => {
                   setShowAddOpinionModal(false);
+                  if (chatMessages.length > 0) {
+                    if (showRecommendations) instantModalRef.current = true;
+                    clearAutoCollapseTimer();
+                    setShowChatOverlay(true);
+                    setShowRecommendations(false);
+                    setUnreadCount(0);
+                    onToggle?.(true);
+                    return;
+                  }
                   setIsSearchExpanded(true);
                   expandedByClickRef.current = true;
                   setTimeout(() => textareaRef.current?.focus(), 350);
@@ -4331,9 +4340,19 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
             </AnimatePresence>
 
             {/* Mobile tap target - opens full-screen search */}
-            <div 
+            <div
               className="flex items-center gap-3 py-1.5 px-2 md:hidden cursor-pointer"
-              onClick={() => { setShowAddOpinionModal(false); setMobileSearchLoading(true); setShowMobileSearch(true); setMobileView('search'); }}
+              onClick={() => {
+                setShowAddOpinionModal(false);
+                setMobileSearchLoading(true);
+                setShowMobileSearch(true);
+                if (chatMessages.length > 0) {
+                  setMobileView('chat');
+                  clearAutoCollapseTimer();
+                } else {
+                  setMobileView('search');
+                }
+              }}
             >
               <Search className="w-5 h-5 text-gray-400 flex-shrink-0" />
               {inputValue ? (
