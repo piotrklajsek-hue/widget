@@ -4300,7 +4300,7 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                   ref={avatarsAnchorRef}
                   className={`group flex items-center gap-1.5 flex-shrink-0 rounded-full cursor-pointer transition-colors ${
                     hasOpinion
-                      ? 'bg-green-500/20 hover:bg-green-500/30'
+                      ? 'bg-green-500 hover:bg-green-600'
                       : isRecommended
                       ? 'bg-[#0b5cff]/20 hover:bg-[#0b5cff]/40'
                       : 'hover:bg-[#F2F2F2]'
@@ -4331,7 +4331,7 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                   }}
                 >
                   {hasOpinion ? (
-                    <Check className="w-3.5 h-3.5 text-green-500" />
+                    <Check className="w-3.5 h-3.5 text-white" />
                   ) : isRecommended ? (
                     <Star className="w-3.5 h-3.5" fill="#0b5cff" stroke="#0b5cff" />
                   ) : (
@@ -4874,8 +4874,8 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                       <div 
                         className={`flex items-center gap-2 rounded-full transition-all cursor-pointer ${
                           hasOpinion
-                            ? (isHovering ? 'bg-green-500/30' : 'bg-green-500/20')
-                            : isRecommended 
+                            ? (isHovering ? 'bg-green-600' : 'bg-green-500')
+                            : isRecommended
                             ? (isHovering ? 'bg-[#0b5cff]/40' : 'bg-[#0b5cff]/20')
                             : ''
                         }`}
@@ -4904,7 +4904,7 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                       >
                         {/* Rating Icon */}
                         {hasOpinion ? (
-                          <Check className="w-4 h-4 text-green-500" />
+                          <Check className="w-4 h-4 text-white" />
                         ) : isRecommended ? (
                           <Star className="w-4 h-4" fill="#0b5cff" stroke="#0b5cff" />
                         ) : (
