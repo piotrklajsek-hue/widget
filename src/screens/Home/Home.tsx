@@ -1378,6 +1378,7 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
         addOpinionOriginRef.current = mobileView;
         setMobileView('addOpinion');
       } else {
+        if (showRecommendations) instantModalRef.current = true;
         setShowAddOpinionModal(true);
       }
     }
@@ -1444,6 +1445,7 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
     if (showMobileSearch) {
       setMobileView(addOpinionOriginRef.current);
     } else {
+      instantModalRef.current = true;
       setShowAddOpinionModal(false);
       setShowRecommendations(true);
     }
@@ -2613,12 +2615,12 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
           <AnimatePresence>
             {showAddOpinionModal && (
               <motion.div
-                initial={{ opacity: 0, y: 10 }}
+                initial={instantModalRef.current ? false : { opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 10 }}
                 transition={{ duration: 0.2 }}
                 className="absolute bottom-full mb-2.5 left-1/2 -translate-x-1/2 w-[576px] max-w-[calc(100vw-32px)] h-[504px] rounded-2xl flex flex-col"
-                style={{ backgroundColor: 'rgba(15, 15, 15, 0.6)', backdropFilter: 'blur(50px)', WebkitBackdropFilter: 'blur(50px)', border: 'none', borderRadius: '24px', boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3), 0 2px 8px rgba(0, 0, 0, 0.2)', overflow: 'hidden' }}
+                style={{ backgroundColor: 'rgba(15, 15, 15, 0.6)', backdropFilter: 'blur(50px)', WebkitBackdropFilter: 'blur(50px)', border: 'none', borderRadius: '24px', boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3), 0 2px 8px rgba(0, 0, 0, 0.2)', overflow: 'hidden', zIndex: instantModalRef.current ? 3 : 2 }}
               >
                 {/* Header */}
                 <div className="flex items-center justify-between p-4 pb-2 flex-shrink-0">
