@@ -2878,7 +2878,7 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                     <div className="space-y-6">
                       <div className="mb-4">
                         <p className="text-white text-sm leading-relaxed">
-                          Napisz kilka słów - zobaczysz 3 gotowe propozycje do wyboru
+                          Napisz kilka słów, a zobaczysz poprawioną wersję stylistycznie przez AI bez naruszania sensu zdania.
                         </p>
                       </div>
                       
@@ -5975,7 +5975,7 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                             <div className="space-y-6">
                               <div className="mb-4">
                                 <p className="text-white text-sm leading-relaxed">
-                                  Napisz kilka słów - zobaczysz 3 gotowe propozycje do wyboru
+                                  Napisz kilka słów, a zobaczysz poprawioną wersję stylistycznie przez AI bez naruszania sensu zdania.
                                 </p>
                               </div>
                               
