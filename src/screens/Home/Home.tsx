@@ -4309,7 +4309,7 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                   {hasOpinion ? (
                     <Check className="w-3.5 h-3.5 text-green-500" />
                   ) : isRecommended ? (
-                    <Star className="w-3.5 h-3.5" fill="#DC8400" stroke="#DC8400" />
+                    <Star className="w-3.5 h-3.5" fill="#0b5cff" stroke="#0b5cff" />
                   ) : (
                     <Star className="w-3.5 h-3.5 transition-colors text-gray-400 group-hover:text-black" fill="currentColor" stroke="currentColor" />
                   )}
@@ -4871,7 +4871,7 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                         {hasOpinion ? (
                           <Check className="w-4 h-4 text-green-500" />
                         ) : isRecommended ? (
-                          <Star className="w-4 h-4" fill="#DC8400" stroke="#DC8400" />
+                          <Star className="w-4 h-4" fill="#0b5cff" stroke="#0b5cff" />
                         ) : (
                           <Star className="w-4 h-4 transition-colors" fill={isHovering ? 'black' : '#9ca3af'} stroke={isHovering ? 'black' : '#9ca3af'} />
                         )}
