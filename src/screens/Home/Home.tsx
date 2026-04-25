@@ -3019,7 +3019,7 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                   
                   {/* Categories/Tags - only show when AI suggestion is selected */}
                   {showAISuggestions && selectedSuggestion !== null && (
-                  <div className="space-y-2">
+                  <div className="space-y-4">
                     <div className="flex items-center justify-between">
                       <div className="flex flex-col gap-0.5">
                         <p className="text-white/70 text-sm flex items-center gap-1">
@@ -3040,12 +3040,12 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                           disabled={!selectedCategories.includes(category) && selectedCategories.length >= 3}
                           className={`px-3 py-1.5 rounded-full text-xs transition-all ${
                             selectedCategories.includes(category)
-                              ? 'text-black'
+                              ? 'text-white'
                               : selectedCategories.length >= 3
                               ? 'bg-white/5 text-white/30 cursor-not-allowed'
                               : 'bg-white/5 text-white/70 hover:bg-white/10'
                           }`}
-                          style={selectedCategories.includes(category) ? { backgroundColor: '#0B9BFF' } : undefined}
+                          style={selectedCategories.includes(category) ? { backgroundColor: '#777777' } : undefined}
                         >
                           {category}
                         </button>
@@ -3056,10 +3056,7 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                   
                   {/* Submit Button - only show when AI suggestion is selected */}
                   {showAISuggestions && selectedSuggestion !== null && (
-                  <div className="flex flex-col items-center gap-2 pb-4">
-                    <p className="text-white/40 text-xs">
-                      Gotowe w 10 sekund
-                    </p>
+                  <div className="flex flex-col items-center gap-2 pb-4" style={{ marginTop: '16px' }}>
                     <button
                       onClick={() => {
                         // Validate all required fields
@@ -6096,7 +6093,7 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                           
                           {/* Categories */}
                           {showAISuggestions && selectedSuggestion !== null && (
-                            <div className="space-y-2">
+                            <div className="space-y-4">
                               <div className="flex items-center justify-between">
                                 <div className="flex flex-col gap-0.5">
                                   <p className="text-white/70 text-sm flex items-center gap-1">
@@ -6117,12 +6114,12 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                                     disabled={!selectedCategories.includes(category) && selectedCategories.length >= 3}
                                     className={`px-3 py-1.5 rounded-full text-xs transition-all ${
                                       selectedCategories.includes(category)
-                                        ? 'text-black'
+                                        ? 'text-white'
                                         : selectedCategories.length >= 3
                                         ? 'bg-white/5 text-white/30 cursor-not-allowed'
                                         : 'bg-white/5 text-white/70 hover:bg-white/10'
                                     }`}
-                                    style={selectedCategories.includes(category) ? { backgroundColor: '#0B9BFF' } : undefined}
+                                    style={selectedCategories.includes(category) ? { backgroundColor: '#777777' } : undefined}
                                   >
                                     {category}
                                   </button>
@@ -6133,10 +6130,7 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                           
                           {/* Submit Button */}
                           {showAISuggestions && selectedSuggestion !== null && (
-                            <div className="flex flex-col items-center gap-2 pb-4">
-                              <p className="text-white/40 text-xs">
-                                Gotowe w 10 sekund
-                              </p>
+                            <div className="flex flex-col items-center gap-2 pb-4" style={{ marginTop: '16px' }}>
                               <button
                                 onClick={() => {
                                   if (opinionText.trim() === '') { showErrorToast('Proszę wpisać opinię'); return; }
