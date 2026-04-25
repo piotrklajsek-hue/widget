@@ -4702,17 +4702,6 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                 )}
                 </AnimatePresence>
                 
-                {/* 🧪 Mock mic button - hidden when typing */}
-                {inputValue.length === 0 && (
-                <motion.button
-                  whileTap={{ scale: 0.95 }}
-                  className="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-all text-gray-500 hover:text-gray-700 hover:bg-gray-100 relative"
-                  onClick={handleMockVoiceInput}
-                >
-                  <Mic className="w-5 h-5" />
-                  <span className="absolute -top-1 -right-1 text-[8px] bg-gray-400/70 text-white rounded-full w-3.5 h-3.5 flex items-center justify-center" style={{ lineHeight: 1 }}>T</span>
-                </motion.button>
-                )}
 
                   {/* 🔧 BLOKADA MIKROFONU (wyłączona na czas testów)
                       Aby ponownie włączyć: przywróć warunek micPermission === 'denied'
@@ -4838,17 +4827,6 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                     )}
                     </AnimatePresence>
                     
-                    {/* 🧪 Mock mic button (single-line) - hidden when typing */}
-                    {inputValue.length === 0 && (
-                    <motion.button
-                      whileTap={{ scale: 0.95 }}
-                      className="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-all text-gray-500 hover:text-gray-700 hover:bg-gray-100 relative"
-                      onClick={handleMockVoiceInput}
-                    >
-                      <Mic className="w-5 h-5" />
-                      <span className="absolute -top-1 -right-1 text-[8px] bg-gray-400/70 text-white rounded-full w-3.5 h-3.5 flex items-center justify-center" style={{ lineHeight: 1 }}>T</span>
-                    </motion.button>
-                    )}
 
                     {/* Mic / Send — single DOM element, no mount/unmount flash */}
                     <button
@@ -6416,15 +6394,6 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                             onClick={handleAddImageClick}
                           >
                             <Plus className="w-5 h-5" />
-                          </button>
-                          
-                          {/* Mock Mic */}
-                          <button
-                            className="w-8 h-8 flex items-center justify-center text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-full transition-all relative"
-                            onClick={handleMockVoiceInput}
-                          >
-                            <Mic className="w-5 h-5" />
-                            <span className="absolute -top-1 -right-1 text-[8px] bg-gray-400/70 text-white rounded-full w-3.5 h-3.5 flex items-center justify-center" style={{ lineHeight: 1 }}>T</span>
                           </button>
                           
                           {/* Mic */}
