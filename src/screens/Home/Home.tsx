@@ -3368,7 +3368,7 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                       const isOnlyPreview = !isAuthenticated && !userOpinions.some(u => u.id === rec.id);
                       const isLast = idx === (userOpinions.length + (isAuthenticated ? recommendations.length : 1) - 1);
                       return (
-                      <div key={rec.id} className="flex flex-col gap-1.5 mb-0 pb-0">
+                      <div key={rec.id} className="flex flex-col gap-1.5" style={{ border: '1px solid #323334', borderRadius: '10px', padding: '8px 14px' }}>
                         {/* Header: Avatar + Name + Date */}
                         <div className="flex items-start gap-3">
                           <div className="w-10 h-10 rounded-full overflow-hidden flex-shrink-0">
@@ -5719,7 +5719,7 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                             {!isLoadingOpinions && [...userOpinions, ...(isAuthenticated ? recommendations : [recommendations[0]])].map((rec, idx) => {
                               const isOnlyPreviewMobile = !isAuthenticated && !userOpinions.some(u => u.id === rec.id);
                               return (
-                              <div key={rec.id} className="flex flex-col gap-1.5 mb-0 pb-0">
+                              <div key={rec.id} className="flex flex-col gap-1.5" style={{ border: '1px solid #323334', borderRadius: '10px', padding: '8px 14px' }}>
                                 {/* Header: Avatar + Name + Date */}
                                 <div className="flex items-start gap-3">
                                   <div className="w-10 h-10 rounded-full overflow-hidden flex-shrink-0">
