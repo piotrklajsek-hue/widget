@@ -4219,7 +4219,6 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                     setShowRecommendations(false);
                     setUnreadCount(0);
                     onToggle?.(true);
-                    return;
                   }
                   setIsSearchExpanded(true);
                   expandedByClickRef.current = true;
@@ -4349,6 +4348,7 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                 if (chatMessages.length > 0) {
                   setMobileView('chat');
                   clearAutoCollapseTimer();
+                  setTimeout(() => mobileSearchTextareaRef.current?.focus(), 350);
                 } else {
                   setMobileView('search');
                 }
