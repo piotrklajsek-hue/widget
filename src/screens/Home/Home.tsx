@@ -1857,8 +1857,8 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
         setInputValue('Ile kosztuje strona internetowa?');
       }
     } else {
-      // Fallback: brak klucza API — użyj mock danych
-      // W konsoli wyświetl instrukcję konfiguracji
+      // Fallback: brak klucza API — użyj api.transcribeAudio (mock z delay 1500ms)
+      // tak by UI "Transkrybuję..." był widoczny zanim pojawi się tekst.
       if (!OPENAI_API_KEY) {
         console.info(
           '🎤 Whisper API nie skonfigurowane. Używam mock transkrypcji.\n' +
@@ -1866,7 +1866,12 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
           'Szczegóły: https://platform.openai.com/docs/guides/speech-to-text'
         );
       }
-      setInputValue('Ile kosztuje strona internetowa?');
+      try {
+        const result = await api.transcribeAudio(capturedBlob, 'search');
+        setInputValue(result.text);
+      } catch {
+        setInputValue('Ile kosztuje strona internetowa?');
+      }
     }
     
     setSearchRecordedBlob(null);
