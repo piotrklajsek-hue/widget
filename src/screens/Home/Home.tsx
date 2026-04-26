@@ -981,6 +981,7 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
       // Clear timer when opening chat
       clearAutoCollapseTimer();
     } else {
+      if (showPopularSearches || showRecommendations) instantModalRef.current = true;
       setShowChatOverlay(true);
       onToggle?.(true);
       // Clear timer when opening chat
