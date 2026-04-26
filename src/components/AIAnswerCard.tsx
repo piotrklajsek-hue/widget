@@ -1,6 +1,5 @@
 import { Star } from 'lucide-react';
 import { FaInstagram, FaTiktok } from 'react-icons/fa';
-import { motion } from 'motion/react';
 
 export interface ServiceItem {
   name: string;
@@ -103,78 +102,76 @@ export function AIAnswerCard({ data, timestamp, followUpQuestions, onCtaClick, o
         {/* ── 5. Portfolio thumbnails ── Instagram + TikTok */}
         {((data.recommendation?.instagramPosts && data.recommendation.instagramPosts.length > 0) ||
           (data.recommendation?.tiktokPosts && data.recommendation.tiktokPosts.length > 0)) && (
-            <motion.div
-              className="pr-5 py-3"
-              initial={{ opacity: 0, y: 6 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.25, ease: 'easeOut' }}
-            >
+            <div className="pr-5 py-3">
               <p className="text-white/30 text-[10px] uppercase tracking-wider mb-2">Media</p>
-
+              
               {/* All media in one row */}
               <div className="flex gap-1.5 overflow-x-auto">
-                {[
-                  ...(data.recommendation?.instagramPosts ?? []).map((post) => ({ post, kind: 'ig' as const })),
-                  ...(data.recommendation?.tiktokPosts ?? []).map((post) => ({ post, kind: 'tt' as const })),
-                ].map(({ post, kind }, idx) => (
-                  <motion.a
-                    key={`${kind}-${post.id}`}
+                {data.recommendation?.instagramPosts?.map((post) => (
+                  <a
+                    key={post.id}
                     href={post.postUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="relative w-[68px] h-[68px] rounded-lg overflow-hidden group cursor-pointer flex-shrink-0 ring-1 ring-white/[0.08]"
-                    initial={{ opacity: 0, scale: 0.96 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.22, ease: 'easeOut', delay: 0.08 + idx * 0.04 }}
                   >
                     <img
                       src={post.imageUrl}
-                      alt={kind === 'ig' ? 'Realizacja' : 'TikTok'}
+                      alt="Realizacja"
                       className="w-full h-full object-cover"
                     />
                     <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all duration-0" />
                     <div className="absolute bottom-1 left-1">
-                      {kind === 'ig'
-                        ? <FaInstagram className="w-3 h-3 text-white/60" />
-                        : <FaTiktok className="w-3 h-3 text-white/60" />}
+                      <FaInstagram className="w-3 h-3 text-white/60" />
                     </div>
-                    {kind === 'tt' && post.type === 'video' && (
+                  </a>
+                ))}
+                {data.recommendation?.tiktokPosts?.map((post) => (
+                  <a
+                    key={post.id}
+                    href={post.postUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="relative w-[68px] h-[68px] rounded-lg overflow-hidden group cursor-pointer flex-shrink-0 ring-1 ring-white/[0.08]"
+                  >
+                    <img
+                      src={post.imageUrl}
+                      alt="TikTok"
+                      className="w-full h-full object-cover"
+                    />
+                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all duration-0" />
+                    <div className="absolute bottom-1 left-1">
+                      <FaTiktok className="w-3 h-3 text-white/60" />
+                    </div>
+                    {post.type === 'video' && (
                       <div className="absolute top-1 right-1">
                         <svg className="w-3 h-3 text-white/70" viewBox="0 0 24 24" fill="currentColor">
                           <path d="M8 5v14l11-7z" />
                         </svg>
                       </div>
                     )}
-                  </motion.a>
+                  </a>
                 ))}
               </div>
-            </motion.div>
+            </div>
         )}
 
         {/* ── 8. Follow-up Questions ── */}
         {followUpQuestions && followUpQuestions.length > 0 && onFollowUpClick && (
-            <motion.div
-              className="pr-5 py-3"
-              initial={{ opacity: 0, y: 6 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.25, ease: 'easeOut' }}
-            >
+            <div className="pr-5 py-3">
               <p className="text-white/30 text-[10px] uppercase tracking-wider mb-2">Powiązane pytania</p>
               <div className="space-y-1">
-                {followUpQuestions.map((q, idx) => (
-                  <motion.button
+                {followUpQuestions.map((q) => (
+                  <button
                     key={q.id}
                     onClick={() => onFollowUpClick(q.text)}
                     className="w-full text-left px-4 py-3 bg-white/5 hover:bg-white/10 text-white rounded-xl transition-all duration-200 text-sm"
-                    initial={{ opacity: 0, y: 4 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.22, ease: 'easeOut', delay: 0.1 + idx * 0.06 }}
                   >
                     {q.text}
-                  </motion.button>
+                  </button>
                 ))}
               </div>
-            </motion.div>
+            </div>
         )}
 
         {/* Timestamp */}
