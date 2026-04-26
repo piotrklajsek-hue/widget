@@ -3817,7 +3817,7 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                           // User bubble
                           <div
                             className="max-w-[80%] rounded-2xl outline-none text-white"
-                            style={{ backgroundColor: 'rgba(27, 28, 29, 0.65)', padding: '12px 16px' }}
+                            style={{ backgroundColor: 'rgba(119, 119, 119, 0.1)', padding: '12px 16px' }}
                           >
                             <p
                               className="whitespace-pre-wrap break-words"
@@ -5276,7 +5276,7 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                                   ) : message.role === 'user' ? (
                                     <div
                                       className="max-w-[80%] rounded-2xl outline-none text-white"
-                                      style={{ backgroundColor: 'rgba(27, 28, 29, 0.65)', padding: '12px 16px' }}
+                                      style={{ backgroundColor: 'rgba(119, 119, 119, 0.1)', padding: '12px 16px' }}
                                     >
                                       <p
                                         className="whitespace-pre-wrap break-words"
