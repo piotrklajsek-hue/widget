@@ -3631,7 +3631,7 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                       <ArrowLeft className="w-5 h-5" />
                     </button>
                     <div>
-                      <h3 className="text-white text-sm font-medium">Wyniki wyszukiwania</h3>
+                      <h3 className="text-white text-sm font-medium">Rozmowa</h3>
                       <p className="text-white/40 text-xs md:hidden">AI asystent</p>
                     </div>
                   </div>
@@ -5022,7 +5022,7 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                   <div className="flex-1">
                     {mobileView === 'chat' ? (
                       <div className="flex items-center gap-2 h-[36px]">
-                        <span className="text-white text-sm">Wyniki wyszukiwania</span>
+                        <span className="text-white text-sm">Rozmowa</span>
                       </div>
                     ) : mobileView === 'recommend' ? (
                       <div className="flex items-center gap-2 h-[36px]">
