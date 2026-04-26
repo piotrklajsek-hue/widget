@@ -3610,7 +3610,7 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                       left: '-15%',
                       width: '70%',
                       height: '60%',
-                      background: 'radial-gradient(ellipse at center, rgba(11, 92, 255, 0.45), rgba(11, 92, 255, 0) 70%)',
+                      background: 'radial-gradient(ellipse at center, rgba(11, 92, 255, 0.22), rgba(11, 92, 255, 0) 70%)',
                       filter: 'blur(60px)',
                     }}
                   />
@@ -3621,7 +3621,7 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                       right: '-15%',
                       width: '75%',
                       height: '65%',
-                      background: 'radial-gradient(ellipse at center, rgba(11, 92, 255, 0.38), rgba(11, 92, 255, 0) 70%)',
+                      background: 'radial-gradient(ellipse at center, rgba(11, 92, 255, 0.18), rgba(11, 92, 255, 0) 70%)',
                       filter: 'blur(70px)',
                     }}
                   />
