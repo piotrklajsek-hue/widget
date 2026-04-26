@@ -3772,6 +3772,10 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                       } else {
                         setUnreadScrollMessages(countUnreadAiMessages());
                       }
+                      // Hide end-prompt indicator once user actually reaches the very bottom
+                      if (el.scrollHeight - el.scrollTop - el.clientHeight < 4) {
+                        setEndPromptNeedsScroll(false);
+                      }
                     }}
                   >
                   {(() => {
@@ -5228,7 +5232,13 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                               maskImage: 'linear-gradient(transparent 0px, transparent 40px, black 64px, black calc(100% - 16px), transparent 100%)',
                               WebkitMaskImage: 'linear-gradient(transparent 0px, transparent 40px, black 64px, black calc(100% - 16px), transparent 100%)',
                             }}
-                            onScroll={(e) => { mobileScroll.handleScrollEvent(e.currentTarget); }}
+                            onScroll={(e) => {
+                              mobileScroll.handleScrollEvent(e.currentTarget);
+                              const el = e.currentTarget;
+                              if (el.scrollHeight - el.scrollTop - el.clientHeight < 4) {
+                                setEndPromptNeedsScroll(false);
+                              }
+                            }}
                           >
                             {(() => {
                               let lastUserIdx = -1;
