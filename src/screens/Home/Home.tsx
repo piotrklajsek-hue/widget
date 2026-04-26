@@ -299,6 +299,9 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
   const [expandedWidth, setExpandedWidth] = useState(540);
   // Track whether we just expanded to skip placeholder y-animation on first frame
   const wasCollapsedRef = useRef(true);
+  // Skip placeholder slide-in on the very first render (page refresh)
+  const [hasMounted, setHasMounted] = useState(false);
+  useEffect(() => { setHasMounted(true); }, []);
   
   // "How It Works" overlay state
   const [showHowItWorksOverlay, setShowHowItWorksOverlay] = useState(false);
@@ -4275,7 +4278,7 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                     <AnimatePresence mode="wait">
                       <motion.span
                         key={chatMessages.length > 0 && hasClosedChat && !showChatOverlay ? 'continue' : currentPlaceholder}
-                        initial={{ x: 16, opacity: 0 }}
+                        initial={hasMounted ? { x: 16, opacity: 0 } : false}
                         animate={{ x: 0, opacity: 1 }}
                         exit={{ x: -16, opacity: 0 }}
                         transition={{ duration: 0.35, ease: 'easeOut' }}
@@ -4402,7 +4405,7 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                 <AnimatePresence mode="wait">
                   <motion.span
                     key={chatMessages.length > 0 && hasClosedChat && !(showMobileSearch && mobileView === 'chat') ? 'continue' : currentPlaceholder}
-                    initial={{ y: -20, opacity: 0 }}
+                    initial={hasMounted ? { y: -20, opacity: 0 } : false}
                     animate={{ y: 0, opacity: 1 }}
                     exit={{ y: 20, opacity: 0 }}
                     transition={{ duration: 0.5, ease: "easeInOut" }}
