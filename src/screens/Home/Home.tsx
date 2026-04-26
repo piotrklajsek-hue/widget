@@ -3606,23 +3606,23 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                   <div
                     style={{
                       position: 'absolute',
-                      top: '-10%',
-                      left: '-15%',
-                      width: '70%',
-                      height: '60%',
-                      background: 'radial-gradient(ellipse at center, rgba(180, 180, 180, 0.10), rgba(180, 180, 180, 0) 70%)',
-                      filter: 'blur(60px)',
+                      top: '-30%',
+                      left: '-30%',
+                      width: '110%',
+                      height: '110%',
+                      background:
+                        'radial-gradient(ellipse 60% 50% at 30% 30%, rgba(180, 180, 180, 0.10) 0%, rgba(180, 180, 180, 0.07) 25%, rgba(180, 180, 180, 0.035) 50%, rgba(180, 180, 180, 0.012) 75%, rgba(180, 180, 180, 0) 100%)',
                     }}
                   />
                   <div
                     style={{
                       position: 'absolute',
-                      bottom: '-15%',
-                      right: '-15%',
-                      width: '75%',
-                      height: '65%',
-                      background: 'radial-gradient(ellipse at center, rgba(180, 180, 180, 0.05), rgba(180, 180, 180, 0) 70%)',
-                      filter: 'blur(70px)',
+                      bottom: '-30%',
+                      right: '-30%',
+                      width: '115%',
+                      height: '115%',
+                      background:
+                        'radial-gradient(ellipse 65% 50% at 70% 70%, rgba(180, 180, 180, 0.05) 0%, rgba(180, 180, 180, 0.035) 25%, rgba(180, 180, 180, 0.018) 50%, rgba(180, 180, 180, 0.006) 75%, rgba(180, 180, 180, 0) 100%)',
                     }}
                   />
                 </div>
