@@ -4302,8 +4302,6 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                   className={`group flex items-center gap-1.5 flex-shrink-0 rounded-full cursor-pointer transition-colors ${
                     hasOpinion
                       ? 'bg-[#027700] hover:bg-[#027700]/80 border border-white/20'
-                      : isRecommended
-                      ? 'bg-[#0b5cff]/20 hover:bg-[#0b5cff]/40'
                       : 'bg-[#D9D9D9] hover:bg-white'
                   }`}
                   style={{
@@ -4854,8 +4852,6 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                         className={`flex items-center gap-2 rounded-full transition-all cursor-pointer ${
                           hasOpinion
                             ? `border border-white/20 ${isHovering ? 'bg-[#027700]/80' : 'bg-[#027700]'}`
-                            : isRecommended
-                            ? (isHovering ? 'bg-[#0b5cff]/40' : 'bg-[#0b5cff]/20')
                             : ''
                         }`}
                         style={{
@@ -4863,7 +4859,7 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                           paddingBottom: '6px',
                           paddingLeft: '8px',
                           paddingRight: '6px',
-                          ...(!hasOpinion && !isRecommended ? { backgroundColor: isHovering ? '#ffffff' : '#D9D9D9' } : {})
+                          ...(!hasOpinion ? { backgroundColor: isHovering ? '#ffffff' : '#D9D9D9' } : {})
                         }}
                         onClick={() => {
                           analytics.trackAvatarClicked();
