@@ -73,7 +73,7 @@ const renderToast = (
 );
 
 const showSuccessToast = (message: string) => {
-  toast.custom((id) => renderToast(id, message, '#0b5cff', Check, 'black'), { duration: 2000 });
+  toast.custom((id) => renderToast(id, message, '#0b5cff', Check, 'white'), { duration: 2000 });
 };
 
 const showErrorToast = (message: string) => {
