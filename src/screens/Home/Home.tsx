@@ -4216,6 +4216,7 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
             className={`p-2 md:py-0 md:px-2 rounded-2xl ${showChatOverlay || showMobileSearch ? 'hidden md:block' : ''}`}
             onMouseEnter={handleWidgetMouseEnter}
             onMouseLeave={handleWidgetMouseLeave}
+            initial={false}
             animate={{
               width: isMobileDevice ? '100%' : (isSearchExpanded ? expandedWidth : 324),
             }}
