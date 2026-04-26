@@ -3597,6 +3597,36 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                 style={!isMobileDevice ? { backgroundColor: 'rgba(15, 15, 15, 0.6)', backdropFilter: 'blur(50px)', WebkitBackdropFilter: 'blur(50px)', borderRadius: '24px', boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3), 0 2px 8px rgba(0, 0, 0, 0.2)', zIndex: instantModalRef.current ? 3 : 2 } : undefined}
                 // On mobile: full screen via fixed inset-0; maxHeight only on md+ via Tailwind
               >
+                {/* Aurora blob — subtle brand-blue gradient blob inside the chat panel */}
+                <div
+                  aria-hidden
+                  className="pointer-events-none absolute inset-0 overflow-hidden"
+                  style={{ borderRadius: 'inherit', zIndex: -1 }}
+                >
+                  <div
+                    style={{
+                      position: 'absolute',
+                      top: '-10%',
+                      left: '-15%',
+                      width: '70%',
+                      height: '60%',
+                      background: 'radial-gradient(ellipse at center, rgba(11, 92, 255, 0.45), rgba(11, 92, 255, 0) 70%)',
+                      filter: 'blur(60px)',
+                    }}
+                  />
+                  <div
+                    style={{
+                      position: 'absolute',
+                      bottom: '-15%',
+                      right: '-15%',
+                      width: '75%',
+                      height: '65%',
+                      background: 'radial-gradient(ellipse at center, rgba(11, 92, 255, 0.38), rgba(11, 92, 255, 0) 70%)',
+                      filter: 'blur(70px)',
+                    }}
+                  />
+                </div>
+
                 {/* Swipe handle (mobile only) */}
                 <div 
                   className="md:hidden flex justify-center pt-2 pb-1 shrink-0 cursor-grab active:cursor-grabbing touch-none"
