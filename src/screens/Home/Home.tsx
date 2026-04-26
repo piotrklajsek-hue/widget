@@ -158,7 +158,7 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
     hasClosedChat, setHasClosedChat,
     isAwaitingEndConfirmation, setIsAwaitingEndConfirmation,
     isChatEnded, setIsChatEnded,
-    showScrollToBottom,
+    showScrollToBottom, setShowScrollToBottom,
     showMobileScrollToBottom, setShowMobileScrollToBottom,
     unreadScrollMessages, setUnreadScrollMessages,
     showChatMenu, setShowChatMenu,
@@ -780,6 +780,24 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
       if (el) el.scrollTop = el.scrollHeight;
     });
   }, [showChatOverlay]);
+
+  // When end-confirmation prompt arrives but its buttons aren't fully visible,
+  // surface the scroll-to-bottom indicator instead of letting them be cut off.
+  useEffect(() => {
+    if (!isAwaitingEndConfirmation) return;
+    requestAnimationFrame(() => {
+      const desktopEl = chatMessagesRef.current;
+      if (desktopEl) {
+        const distanceFromBottom = desktopEl.scrollHeight - desktopEl.scrollTop - desktopEl.clientHeight;
+        if (distanceFromBottom > 4) setShowScrollToBottom(true);
+      }
+      const mobileEl = mobileChatContainerRef.current;
+      if (mobileEl) {
+        const distanceFromBottom = mobileEl.scrollHeight - mobileEl.scrollTop - mobileEl.clientHeight;
+        if (distanceFromBottom > 4) setShowMobileScrollToBottom(true);
+      }
+    });
+  }, [isAwaitingEndConfirmation, chatMessages, setShowScrollToBottom, setShowMobileScrollToBottom]);
 
   // Close menus when clicking outside
   useEffect(() => {
