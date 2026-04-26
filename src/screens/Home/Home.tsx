@@ -4327,11 +4327,7 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
               {showSocialProof && (
                 <div
                   ref={avatarsAnchorRef}
-                  className={`group flex items-center gap-1.5 flex-shrink-0 rounded-full cursor-pointer transition-colors ${
-                    hasOpinion
-                      ? 'bg-[#027700] hover:bg-[#027700]/80 border border-white/20'
-                      : 'bg-[#D9D9D9] hover:bg-white'
-                  }`}
+                  className={`group flex items-center gap-1.5 flex-shrink-0 rounded-full cursor-pointer transition-colors bg-[#D9D9D9] hover:bg-white`}
                   style={{
                     paddingTop: '6px',
                     paddingBottom: '6px',
@@ -4358,7 +4354,7 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                   }}
                 >
                   {hasOpinion ? (
-                    <Check className="w-3.5 h-3.5 text-white" />
+                    <Check className="w-3.5 h-3.5 text-[#027700]" />
                   ) : isRecommended ? (
                     <Star className="w-3.5 h-3.5" fill="#0b5cff" stroke="#0b5cff" />
                   ) : (
@@ -4876,18 +4872,14 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                       onMouseEnter={() => setIsHovering(true)}
                       onMouseLeave={() => setIsHovering(false)}
                     >
-                      <div 
-                        className={`flex items-center gap-2 rounded-full transition-all cursor-pointer ${
-                          hasOpinion
-                            ? `border border-white/20 ${isHovering ? 'bg-[#027700]/80' : 'bg-[#027700]'}`
-                            : ''
-                        }`}
+                      <div
+                        className="flex items-center gap-2 rounded-full transition-all cursor-pointer"
                         style={{
                           paddingTop: '6px',
                           paddingBottom: '6px',
                           paddingLeft: '8px',
                           paddingRight: '6px',
-                          ...(!hasOpinion ? { backgroundColor: isHovering ? '#ffffff' : '#D9D9D9' } : {})
+                          backgroundColor: isHovering ? '#ffffff' : '#D9D9D9'
                         }}
                         onClick={() => {
                           analytics.trackAvatarClicked();
@@ -4907,7 +4899,7 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                       >
                         {/* Rating Icon */}
                         {hasOpinion ? (
-                          <Check className="w-4 h-4 text-white" />
+                          <Check className="w-4 h-4 text-[#027700]" />
                         ) : isRecommended ? (
                           <Star className="w-4 h-4" fill="#0b5cff" stroke="#0b5cff" />
                         ) : (
