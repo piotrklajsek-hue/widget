@@ -3747,8 +3747,8 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                       marginRight: '16px',
                       borderRadius: '0px 0px 24px 24px',
                       paddingTop: '8px',
-                      maskImage: 'linear-gradient(transparent 0px, black 8px, black calc(100% - 16px), transparent 100%)',
-                      WebkitMaskImage: 'linear-gradient(transparent 0px, black 8px, black calc(100% - 16px), transparent 100%)',
+                      maskImage: 'linear-gradient(transparent 0px, black 8px, black calc(100% - 32px), transparent 100%)',
+                      WebkitMaskImage: 'linear-gradient(transparent 0px, black 8px, black calc(100% - 32px), transparent 100%)',
                     }}
                     onScroll={(e) => {
                       const el = e.currentTarget;
@@ -5233,8 +5233,8 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                               marginRight: '16px',
                               borderRadius: '0px 0px 24px 24px',
                               paddingTop: '56px',
-                              maskImage: 'linear-gradient(transparent 0px, transparent 40px, black 64px, black calc(100% - 16px), transparent 100%)',
-                              WebkitMaskImage: 'linear-gradient(transparent 0px, transparent 40px, black 64px, black calc(100% - 16px), transparent 100%)',
+                              maskImage: 'linear-gradient(transparent 0px, transparent 40px, black 64px, black calc(100% - 32px), transparent 100%)',
+                              WebkitMaskImage: 'linear-gradient(transparent 0px, transparent 40px, black 64px, black calc(100% - 32px), transparent 100%)',
                             }}
                             onScroll={(e) => {
                               mobileScroll.handleScrollEvent(e.currentTarget);
@@ -5429,8 +5429,8 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                             marginRight: '16px',
                             borderRadius: '0px 0px 24px 24px',
                             paddingTop: '56px',
-                            maskImage: 'linear-gradient(transparent 0px, transparent 40px, black 64px, black calc(100% - 16px), transparent 100%)',
-                            WebkitMaskImage: 'linear-gradient(transparent 0px, transparent 40px, black 64px, black calc(100% - 16px), transparent 100%)',
+                            maskImage: 'linear-gradient(transparent 0px, transparent 40px, black 64px, black calc(100% - 32px), transparent 100%)',
+                            WebkitMaskImage: 'linear-gradient(transparent 0px, transparent 40px, black 64px, black calc(100% - 32px), transparent 100%)',
                           }}
                         >
                           {/* Centered Avatar Row + Text + Recommend Button */}
@@ -5638,8 +5638,8 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                             marginRight: '16px',
                             borderRadius: '0px 0px 24px 24px',
                             paddingTop: '56px',
-                            maskImage: 'linear-gradient(transparent 0px, transparent 40px, black 64px, black calc(100% - 16px), transparent 100%)',
-                            WebkitMaskImage: 'linear-gradient(transparent 0px, transparent 40px, black 64px, black calc(100% - 16px), transparent 100%)',
+                            maskImage: 'linear-gradient(transparent 0px, transparent 40px, black 64px, black calc(100% - 32px), transparent 100%)',
+                            WebkitMaskImage: 'linear-gradient(transparent 0px, transparent 40px, black 64px, black calc(100% - 32px), transparent 100%)',
                           }}
                         >
                           {/* Social proof + buttons */}
@@ -5863,8 +5863,8 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                             marginRight: '16px',
                             borderRadius: '0px 0px 24px 24px',
                             paddingTop: '56px',
-                            maskImage: 'linear-gradient(transparent 0px, transparent 40px, black 64px, black calc(100% - 16px), transparent 100%)',
-                            WebkitMaskImage: 'linear-gradient(transparent 0px, transparent 40px, black 64px, black calc(100% - 16px), transparent 100%)',
+                            maskImage: 'linear-gradient(transparent 0px, transparent 40px, black 64px, black calc(100% - 32px), transparent 100%)',
+                            WebkitMaskImage: 'linear-gradient(transparent 0px, transparent 40px, black 64px, black calc(100% - 32px), transparent 100%)',
                           }}
                         >
                           {/* Step 1: Choose input method */}
