@@ -158,7 +158,7 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
     hasClosedChat, setHasClosedChat,
     isAwaitingEndConfirmation, setIsAwaitingEndConfirmation,
     isChatEnded, setIsChatEnded,
-    showScrollToBottom, setShowScrollToBottom,
+    showScrollToBottom,
     showMobileScrollToBottom, setShowMobileScrollToBottom,
     unreadScrollMessages, setUnreadScrollMessages,
     showChatMenu, setShowChatMenu,
@@ -781,23 +781,23 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
     });
   }, [showChatOverlay]);
 
-  // When end-confirmation prompt arrives but its buttons aren't fully visible,
-  // surface the scroll-to-bottom indicator instead of letting them be cut off.
+  // When end-confirmation prompt arrives, the hook's 80px isAtBottom tolerance
+  // hides the scroll arrow even though the Tak/Nie buttons are clipped. Track
+  // a parallel flag and OR it into the render condition.
+  const [endPromptNeedsScroll, setEndPromptNeedsScroll] = useState(false);
   useEffect(() => {
-    if (!isAwaitingEndConfirmation) return;
-    requestAnimationFrame(() => {
-      const desktopEl = chatMessagesRef.current;
-      if (desktopEl) {
-        const distanceFromBottom = desktopEl.scrollHeight - desktopEl.scrollTop - desktopEl.clientHeight;
-        if (distanceFromBottom > 4) setShowScrollToBottom(true);
-      }
-      const mobileEl = mobileChatContainerRef.current;
-      if (mobileEl) {
-        const distanceFromBottom = mobileEl.scrollHeight - mobileEl.scrollTop - mobileEl.clientHeight;
-        if (distanceFromBottom > 4) setShowMobileScrollToBottom(true);
-      }
-    });
-  }, [isAwaitingEndConfirmation, chatMessages, setShowScrollToBottom, setShowMobileScrollToBottom]);
+    if (!isAwaitingEndConfirmation) {
+      setEndPromptNeedsScroll(false);
+      return;
+    }
+    const id = setTimeout(() => {
+      const el = chatMessagesRef.current ?? mobileChatContainerRef.current;
+      if (!el) return;
+      const distanceFromBottom = el.scrollHeight - el.scrollTop - el.clientHeight;
+      setEndPromptNeedsScroll(distanceFromBottom > 4);
+    }, 120);
+    return () => clearTimeout(id);
+  }, [isAwaitingEndConfirmation, chatMessages]);
 
   // Close menus when clicking outside
   useEffect(() => {
@@ -3913,12 +3913,12 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
 
                   {/* Scroll to bottom button */}
                   <AnimatePresence>
-                    {showScrollToBottom && (
+                    {(showScrollToBottom || endPromptNeedsScroll) && (
                       <motion.button
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: 20 }}
-                        transition={{ 
+                        transition={{
                           type: "spring",
                           stiffness: 400,
                           damping: 25,
@@ -3931,6 +3931,7 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                               behavior: 'smooth'
                             });
                             setUnreadScrollMessages(0);
+                            setEndPromptNeedsScroll(false);
                             wasAtBottomRef.current = true;
                             if (chatMessages.length > 0) {
                               lastBottomMessageIdRef.current = chatMessages[chatMessages.length - 1].id;
@@ -5349,12 +5350,12 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
 
                           {/* Mobile Scroll to bottom button */}
                           <AnimatePresence>
-                            {showMobileScrollToBottom && (
+                            {(showMobileScrollToBottom || endPromptNeedsScroll) && (
                               <motion.button
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 exit={{ opacity: 0, y: 20 }}
-                                transition={{ 
+                                transition={{
                                   type: "spring",
                                   stiffness: 400,
                                   damping: 25,
@@ -5368,6 +5369,7 @@ export function LoclyWidget(props: LoclyWidgetProps = {}) {
                                     });
                                     mobileWasAtBottomRef.current = true;
                                     setUnreadScrollMessages(0);
+                                    setEndPromptNeedsScroll(false);
                                     if (chatMessages.length > 0) {
                                       lastBottomMessageIdRef.current = chatMessages[chatMessages.length - 1].id;
                                     }
